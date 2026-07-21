@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Session 3 · Data Analytics - learn data product with phoebe</title>
+<link rel="stylesheet" href="../assets/style.css?v=1">
+<style>
+  :root{ --indigo:#0D9488; --indigo-deep:#0F766E; --indigo-mid:#14B8A6; --indigo-soft:#5EEAD4; --indigo-50:#F0FDFA; }
+</style>
+</head>
+<body>
+
+<div class="toolbar">
+  <div class="wrap">
+    <span class="crumb"><a href="../index.html">learn-data-product-with-phoebe</a> / Session 3 of 6</span>
+    <button class="btn" id="toggle-all" type="button">Expand all</button>
+    <button class="btn primary" id="zoom-toggle" type="button">Projector zoom: off</button>
+  </div>
+</div>
+
+<header class="masthead">
+  <div class="wrap">
+    <div class="eyebrow">Learn Data Product with Phoebe · Session 3 of 6</div>
+    <h1>Data Analytics <span class="accent">- turning stored data into answers you can trust</span></h1>
+    <p class="sub">Kasa now has a warehouse (Session 2). But a warehouse full of data is not the same as a business that trusts its numbers. This is the analytics tier: eleven products that take stored data and turn it into answers people can stake a decision on. It is the biggest session in the course because analytics is where most companies live - and where most of them quietly go wrong. We group the eleven into a simple arc: first you trust the number, then you show the number, then you run the whole business on it.</p>
+    <div class="chip-row">
+      <span class="chip level">🟡 Core</span>
+      <span class="chip audience">Leaders + builders</span>
+      <span class="chip audience">Catalog · light on code</span>
+      <span class="chip time">45 min</span>
+    </div>
+    <div class="agenda">
+      <span class="a1" style="flex:1">0-3 · Setup</span>
+      <span class="a2" style="flex:4">3-20 · Trust the number</span>
+      <span class="a3" style="flex:4">20-36 · Show + run on the number</span>
+      <span class="a4" style="flex:1">36-45 · Wrap</span>
+    </div>
+  </div>
+</header>
+
+<main class="wrap">
+
+  <!-- ============ INTRO ============ -->
+  <section class="section" id="intro">
+    <div class="section-kicker">
+      <span class="klabel">Part 0</span>
+      <h2>Where analytics sits on the ladder</h2>
+    </div>
+    <p class="lede">Infrastructure answered "where does our data live?" Analytics answers the next question every leader actually cares about: <strong>"what happened, and can I trust the number?"</strong> This is the <strong>teal</strong> tier. It sits on top of the warehouse and under data science - you cannot predict the future until you can measure the present without arguing about it. Kasa arrives here with data finally in one place but with three teams still quoting three different revenue figures. The eleven products in this session fix that, in order: <strong>trust the number</strong> (validate it, define it, structure it, score the definitions), <strong>show the number</strong> (report, dashboard, scorecard, self-serve), then <strong>run on the number</strong> (investigate, monitor, share the story).</p>
+    <div class="legend">
+      <span class="pill solid">Live - covered in session</span>
+      <span class="pill light">Self-study - read after</span>
+      <span class="pill amber">★ The running case: Kasa</span>
+      <span class="pill inkpill">11 products · teal tier · 3 parts</span>
+    </div>
+    <div class="callout win">
+      <strong>★ What you walk out with today</strong>
+      A working map of the analytics tier - and the order that matters. Most orgs buy dashboards first and wonder why every meeting is an argument about whose number is right. You will leave knowing why trust comes before display, display before ritual, and how eleven distinct products chain into "one trusted number the CFO can run the company on."
+    </div>
+  </section>
+
+  <!-- ============ PART 1: TRUST THE NUMBER ============ -->
+  <section class="section" id="trust">
+    <div class="section-kicker">
+      <span class="klabel">Part 1 · trust the number</span>
+      <h2>Before you show anything, earn the number <span class="tag concept">9 min live</span></h2>
+    </div>
+    <p class="lede">A beautiful dashboard on an unvalidated, undefined number is a confident lie - it just makes the wrong answer look official. So the analytics tier starts underground, with the unglamorous work nobody applauds: check the data is real, define what each metric means, structure the metrics into a tree, then score the definitions so they do not rot. Get this wrong and everything above it inherits the error. These four products are Kasa's foundation for trust.</p>
+
+    <figure class="zoomable">
+      <svg viewBox="0 0 880 360" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="A trust pyramid: data validation at the base, then metric development, then KPI system design, with the executive scorecard resting at the top. Each layer rests on the one below.">
+        <style>
+          .tpT { font: 800 15px Inter, sans-serif; fill: #FFFFFF; }
+          .tpS { font: 600 12px Inter, sans-serif; fill: #FFFFFF; }
+          .tpN { font: 600 11px Inter, sans-serif; fill: #6B6785; }
+          .tpA { stroke: #0F766E; stroke-width: 2.4; fill: none; marker-end: url(#tpAh); }
+        </style>
+        <defs>
+          <marker id="tpAh" markerWidth="9" markerHeight="9" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6" fill="none" stroke="#0F766E" stroke-width="1.6"/></marker>
+        </defs>
+        <!-- base to top, narrowing -->
+        <rect x="130" y="264" width="620" height="60" rx="10" fill="#0F766E"/>
+        <text class="tpT" x="440" y="292" text-anchor="middle">Data Validation</text><text class="tpS" x="440" y="312" text-anchor="middle">is the data complete, valid, fresh?</text>
+        <rect x="200" y="192" width="480" height="60" rx="10" fill="#0D9488"/>
+        <text class="tpT" x="440" y="220" text-anchor="middle">Metric Development</text><text class="tpS" x="440" y="240" text-anchor="middle">what does this number even mean?</text>
+        <rect x="270" y="120" width="340" height="60" rx="10" fill="#14B8A6"/>
+        <text class="tpT" x="440" y="148" text-anchor="middle">KPI System Design</text><text class="tpS" x="440" y="168" text-anchor="middle">how do the metrics link to goals?</text>
+        <rect x="330" y="48" width="220" height="60" rx="10" fill="#5EEAD4"/>
+        <text class="tpT" x="440" y="76" text-anchor="middle" style="fill:#0F766E">Executive Scorecard</text><text class="tpS" x="440" y="96" text-anchor="middle" style="fill:#0F766E">the few numbers that matter</text>
+        <!-- rests-on arrows -->
+        <path class="tpA" d="M440,264 L440,254"/>
+        <path class="tpA" d="M440,192 L440,182"/>
+        <path class="tpA" d="M440,120 L440,110"/>
+        <!-- note -->
+        <rect x="130" y="338" width="14" height="14" rx="3" fill="#84CC16"/>
+        <text class="tpN" x="120" y="349" style="fill:#1E1B3A">Higher rests on lower. A scorecard is only as honest as the metrics under it, and those only as honest as the validation.</text>
+      </svg>
+      <figcaption>🔍 Click to zoom - the trust pyramid: validation holds up definitions, definitions hold up the KPI tree, and the scorecard sits on top</figcaption>
+    </figure>
+
+    <details class="card" open>
+      <summary><span class="mode live">Live</span>Data Validation<span class="mini">2 min</span><span class="caret">▶</span></summary>
+      <div class="body">
+        <p><strong>What it is.</strong> Automated checks that confirm data is complete, valid, and fresh before anyone is allowed to use it. It is the gate at the front door of every report.</p>
+        <table class="clean">
+          <tbody>
+            <tr><td><b>Kasa example</b></td><td>A rule rejects a store's nightly load if its row count drops more than 30% versus the trailing average - the load is quarantined, not silently averaged into the regional total.</td></tr>
+            <tr><td><b>Business value</b></td><td>No garbage ever reaches a dashboard. The number people see is the number that was actually true.</td></tr>
+            <tr><td><b>Reach for it when</b></td><td>Before ANY reporting. This is the gate - build it first, or everything downstream inherits bad data.</td></tr>
+            <tr><td><b>Tier</b></td><td><span class="chip level">🟡 Data Analytics</span></td></tr>
+          </tbody>
+        </table>
+        <div class="callout example">
+          <span class="ex-pill">Real world</span>
+          <p>Kasa's Malaysia revenue looked flat for three weeks - not great, but not alarming. Then Raj added row-count and freshness validation and found one busy KL store had been silently half-loading every night for a month: the ETL timed out, wrote what it had, and moved on. The "flat" number was actually a hidden decline masked by missing rows. Validation did not just clean the data - it uncovered a real business problem the polished dashboards had been hiding. That is why the gate comes before the display.</p>
+        </div>
+      </div>
+    </details>
+
+    <details class="card">
+      <summary><span class="mode live">Live</span>Metric Development<span class="mini">2 min</span><span class="caret">▶</span></summary>
+      <div class="body">
+        <p><strong>What it is.</strong> Defining a metric rigorously - its formula, its grain, its filters, and its edge cases - so that everyone who computes it gets the same answer.</p>
+        <table class="clean">
+          <tbody>
+            <tr><td><b>Kasa example</b></td><td>Nail "conversion rate" once: which sessions count, which orders count, does an app-then-store purchase count, what about returns inside the window. One definition, written down.</td></tr>
+            <tr><td><b>Business value</b></td><td>Everyone computes the metric the same way, so the number stops changing depending on who pulled it.</td></tr>
+            <tr><td><b>Reach for it when</b></td><td>A term means three different things to three different teams and every meeting starts by reconciling definitions.</td></tr>
+            <tr><td><b>Tier</b></td><td><span class="chip level">🟡 Data Analytics</span></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </details>
+
+    <details class="card">
+      <summary><span class="mode live">Live</span>KPI System Design<span class="mini">2 min</span><span class="caret">▶</span></summary>
+      <div class="body">
+        <p><strong>What it is.</strong> A coherent tree of KPIs linked to goals and to owners - a hierarchy, not a random pile of two hundred metrics.</p>
+        <table class="clean">
+          <tbody>
+            <tr><td><b>Kasa example</b></td><td>A north-star metric (net revenue retention) breaks down into input KPIs - basket size, visit frequency, active customers - each with a named owner who moves it.</td></tr>
+            <tr><td><b>Business value</b></td><td>Metrics that drive action rather than vanity. Every number ladders up to a goal and down to a person.</td></tr>
+            <tr><td><b>Reach for it when</b></td><td>You have two hundred metrics and no hierarchy - nobody can say which ones actually matter.</td></tr>
+            <tr><td><b>Tier</b></td><td><span class="chip level">🟡 Data Analytics</span></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </details>
+
+    <details class="card">
+      <summary><span class="mode self">Self-study</span>Data Dictionary Scorecard<span class="mini">2 min read</span><span class="caret">▶</span></summary>
+      <div class="body">
+        <p><strong>What it is.</strong> A health score on the data dictionary itself - the percentage of fields that are defined, owned, and fresh. It measures whether your definitions are actually maintained.</p>
+        <table class="clean">
+          <tbody>
+            <tr><td><b>Kasa example</b></td><td>A tracked number: "78% of gold-layer tables documented, 62% with a named owner" - reported monthly, trending up as governance work lands.</td></tr>
+            <tr><td><b>Business value</b></td><td>Makes governance measurable and therefore fundable. You cannot get budget for "better definitions"; you can get budget to move 78% to 95%.</td></tr>
+            <tr><td><b>Reach for it when</b></td><td>The dictionary exists but rots - fields drift, owners leave, and nobody notices until a report breaks.</td></tr>
+            <tr><td><b>Tier</b></td><td><span class="chip level">🟡 Data Analytics</span></td></tr>
+          </tbody>
+        </table>
+        <div class="callout tip">
+          <strong>Why this closes Part 1</strong>
+          Validation, metric development and KPI design build trust once. The dictionary scorecard is what keeps that trust from decaying - it turns "we defined things last year" into a living number the CDAO reviews every month.
+        </div>
+      </div>
+    </details>
+  </section>
+
+  <!-- ============ PART 2: SHOW THE NUMBER ============ -->
+  <section class="section" id="show">
+    <div class="section-kicker">
+      <span class="klabel">Part 2 · show the number</span>
+      <h2>Now put the trusted number in front of people <span class="tag concept">8 min live</span></h2>
+    </div>
+    <p class="lede">Once a number is trustworthy, the job is to get it to the right person in the right form. That is not one product - it is four, each for a different audience and rhythm. <strong>Smart reporting</strong> replaces the hand-built weekly deck. <strong>Dashboarding</strong> gives a live view to watch. <strong>Executive scorecards</strong> compress everything to the few numbers a board cares about. <strong>Self-serve BI</strong> lets business users answer their own questions without a ticket. Match the product to the audience, or you will build a board scorecard for an analyst and a raw dashboard for a CEO.</p>
+
+    <figure class="zoomable">
+      <svg viewBox="0 0 880 380" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="A mock executive scorecard: a one-page board view with four KPI tiles showing revenue versus target, margin, NPS and cash, each with a value, a target and an up or down arrow, in teal.">
+        <style>
+          .scH { font: 800 15px Inter, sans-serif; fill: #1E1B3A; }
+          .scLbl { font: 700 12px Inter, sans-serif; fill: #FFFFFF; }
+          .scVal { font: 800 26px Inter, sans-serif; fill: #FFFFFF; }
+          .scTgt { font: 600 11px Inter, sans-serif; fill: #F0FDFA; }
+          .scDelU { font: 800 13px Inter, sans-serif; fill: #84CC16; }
+          .scDelD { font: 800 13px Inter, sans-serif; fill: #FCA5A5; }
+          .scN { font: 600 11px Inter, sans-serif; fill: #6B6785; }
+        </style>
+        <!-- board page frame -->
+        <rect x="30" y="30" width="820" height="292" rx="14" fill="#F0FDFA" stroke="#5EEAD4" stroke-width="2"/>
+        <text class="scH" x="52" y="64">Kasa - board scorecard · week 29</text>
+        <text class="scN" x="620" y="64">one page · vs target</text>
+        <!-- tile 1: Revenue -->
+        <rect x="52" y="86" width="376" height="98" rx="12" fill="#0F766E"/>
+        <text class="scLbl" x="72" y="112">Revenue (wk)</text>
+        <text class="scVal" x="72" y="150">$24.6M</text>
+        <text class="scTgt" x="72" y="172">target $24.0M</text>
+        <text class="scDelU" x="360" y="150" text-anchor="end">▲ +2.5%</text>
+        <!-- tile 2: Margin -->
+        <rect x="452" y="86" width="376" height="98" rx="12" fill="#0D9488"/>
+        <text class="scLbl" x="472" y="112">Gross margin</text>
+        <text class="scVal" x="472" y="150">38.1%</text>
+        <text class="scTgt" x="472" y="172">target 40.0%</text>
+        <text class="scDelD" x="760" y="150" text-anchor="end">▼ -1.9pt</text>
+        <!-- tile 3: NPS -->
+        <rect x="52" y="200" width="376" height="98" rx="12" fill="#14B8A6"/>
+        <text class="scLbl" x="72" y="226">NPS</text>
+        <text class="scVal" x="72" y="264">+47</text>
+        <text class="scTgt" x="72" y="286">target +45</text>
+        <text class="scDelU" x="360" y="264" text-anchor="end">▲ +3</text>
+        <!-- tile 4: Cash -->
+        <rect x="452" y="200" width="376" height="98" rx="12" fill="#0F766E"/>
+        <text class="scLbl" x="472" y="226">Cash runway</text>
+        <text class="scVal" x="472" y="264">14 mo</text>
+        <text class="scTgt" x="472" y="286">target 12 mo</text>
+        <text class="scDelU" x="760" y="264" text-anchor="end">▲ +2 mo</text>
+        <!-- note square + takeaway -->
+        <rect x="30" y="340" width="14" height="14" rx="3" fill="#84CC16"/>
+        <text class="scN" x="52" y="351" style="fill:#1E1B3A">One page, four numbers, each against target with direction. Margin is the only red - so that is the only thing the board discusses. That focus is the product.</text>
+      </svg>
+      <figcaption>🔍 Click to zoom - an executive scorecard mock: the whole company on one page, each KPI against its target, red where it matters</figcaption>
+    </figure>
+
+    <details class="card">
+      <summary><span class="mode live">Live</span>Smart Reporting<span class="mini">2 min</span><span class="caret">▶</span></summary>
+      <div class="body">
+        <p><strong>What it is.</strong> Reports that are automated, refreshed on a schedule, and self-explaining - not hand-built decks somebody rebuilds every week.</p>
+        <table class="clean">
+          <tbody>
+            <tr><td><b>Kasa example</b></td><td>The weekly store-performance report generates itself every Monday at 6am, pulls validated numbers, writes its own summary, and lands in inboxes before anyone arrives.</td></tr>
+            <tr><td><b>Business value</b></td><td>Hours given back and copy-paste errors removed. The analyst stops being a human ETL pipeline.</td></tr>
+            <tr><td><b>Reach for it when</b></td><td>Someone rebuilds the same report by hand on a schedule - the clearest "heroic one-off" waiting to become a product.</td></tr>
+            <tr><td><b>Tier</b></td><td><span class="chip level">🟡 Data Analytics</span></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </details>
+
+    <details class="card">
+      <summary><span class="mode live">Live</span>Dashboarding<span class="mini">2 min</span><span class="caret">▶</span></summary>
+      <div class="body">
+        <p><strong>What it is.</strong> Live visual views of metrics built for monitoring and exploration - the thing people leave open on a second monitor.</p>
+        <table class="clean">
+          <tbody>
+            <tr><td><b>Kasa example</b></td><td>The daily sales and foot-traffic dashboard, filterable by region and store, refreshed hourly so store ops can see today unfold.</td></tr>
+            <tr><td><b>Business value</b></td><td>Everyone sees the same live picture. The debate moves from "whose number" to "what do we do about it."</td></tr>
+            <tr><td><b>Reach for it when</b></td><td>A metric needs continuous watching rather than a one-off answer.</td></tr>
+            <tr><td><b>Tier</b></td><td><span class="chip level">🟡 Data Analytics</span></td></tr>
+          </tbody>
+        </table>
+        <div class="callout example">
+          <span class="ex-pill">Real world</span>
+          <p>Kasa's first instinct was the classic mistake: forty dashboards, one per team, all built fast on unvalidated data. Within a month the Monday leadership meeting had become a ritual argument - finance's dashboard said revenue was up, ops' said flat, marketing's said down, and everyone trusted their own. Sofia killed thirty of the forty, pointed the survivors at the validated warehouse marts, and made one shared regional dashboard the single source. The lesson Kasa learned the expensive way: a dashboard is only worth building after the number under it is trusted. Display without trust just multiplies the argument.</p>
+        </div>
+      </div>
+    </details>
+
+    <details class="card">
+      <summary><span class="mode live">Live</span>Executive Scorecard<span class="mini">2 min</span><span class="caret">▶</span></summary>
+      <div class="body">
+        <p><strong>What it is.</strong> The few board-level numbers, each shown against its target, on a single page. Not a dashboard to explore - a verdict to read.</p>
+        <table class="clean">
+          <tbody>
+            <tr><td><b>Kasa example</b></td><td>The CFO's one-pager: revenue, gross margin, NPS and cash runway, each versus target with a direction arrow (the mock above).</td></tr>
+            <tr><td><b>Business value</b></td><td>Leadership aligned on what matters. The meeting spends its time on the one red number, not on reconciling four green ones.</td></tr>
+            <tr><td><b>Reach for it when</b></td><td>Execs ask "how are WE doing?" every week and get a different-looking answer each time.</td></tr>
+            <tr><td><b>Tier</b></td><td><span class="chip level">🟡 Data Analytics</span></td></tr>
+          </tbody>
+        </table>
+        <div class="callout example">
+          <span class="ex-pill">Real world</span>
+          <p>Before the scorecard, Kasa's monthly board pack was 42 slides and the board still left unsure whether the quarter was good. Mei replaced the opening with a single validated one-pager - four KPIs, each against target, margin flagged red. The first meeting using it lasted twenty minutes less and produced an actual decision: pause a low-margin promo. The scorecard did not add information; it removed all the information that was not a decision. That subtraction is why it sits at the top of the trust pyramid - it only works because every number on it was validated, defined, and laddered up from the KPI tree beneath.</p>
+        </div>
+      </div>
+    </details>
+
+    <details class="card">
+      <summary><span class="mode self">Self-study</span>Self-Serve BI Enablement<span class="mini">2 min read</span><span class="caret">▶</span></summary>
+      <div class="body">
+        <p><strong>What it is.</strong> The tools, training, and governed datasets that let business users answer their own questions without filing a ticket to the analytics team.</p>
+        <table class="clean">
+          <tbody>
+            <tr><td><b>Kasa example</b></td><td>Store managers slice their own store's numbers - by day, by category, by staff shift - from a governed, certified dataset, with no request queue.</td></tr>
+            <tr><td><b>Business value</b></td><td>Analysts are freed from the ad-hoc queue and get back to real analysis. Decisions happen at the edge, faster.</td></tr>
+            <tr><td><b>Reach for it when</b></td><td>The analytics team has become a bottleneck - every question waits in line behind the last one.</td></tr>
+            <tr><td><b>Tier</b></td><td><span class="chip level">🟡 Data Analytics</span></td></tr>
+          </tbody>
+        </table>
+        <div class="callout tip">
+          <strong>Self-serve needs a floor, not just a tool</strong>
+          Handing people a BI tool on ungoverned data recreates the forty-dashboard mess at scale. Self-serve only works on top of Part 1 - certified datasets and shared metric definitions - otherwise everyone self-serves a slightly different wrong number.
+        </div>
+      </div>
+    </details>
+  </section>
+
+  <!-- ============ PART 3: RUN ON THE NUMBER ============ -->
+  <section class="section" id="run">
+    <div class="section-kicker">
+      <span class="klabel">Part 3 · run on the number</span>
+      <h2>From having numbers to running on them <span class="tag concept">6 min live</span></h2>
+    </div>
+    <p class="lede">Trusted, visible numbers are still inert until the organization actually operates on them. The last three products turn analytics into a habit: <strong>ad-hoc thematic analysis</strong> answers the novel question no dashboard covers, <strong>business performance monitoring</strong> tells you when something drifts so you do not have to keep looking, and <strong>regular insights sharing</strong> turns data into narrative the org acts on. This is where a company stops "having data" and starts being run by it.</p>
+
+    <details class="card">
+      <summary><span class="mode live">Live</span>Ad-hoc Thematic Analysis<span class="mini">2 min</span><span class="caret">▶</span></summary>
+      <div class="body">
+        <p><strong>What it is.</strong> A deep, one-off study that answers a specific, high-stakes business question no standing dashboard was built to cover.</p>
+        <table class="clean">
+          <tbody>
+            <tr><td><b>Kasa example</b></td><td>"Why did Malaysia gross margin drop in Q2?" - a focused investigation across mix, promos, freight and returns that lands a cause and a recommendation in a week.</td></tr>
+            <tr><td><b>Business value</b></td><td>A decision, fast, when the dashboards cannot answer it - the analyst earning their keep on judgment, not plumbing.</td></tr>
+            <tr><td><b>Reach for it when</b></td><td>A novel, high-stakes question appears that no existing report was designed to answer.</td></tr>
+            <tr><td><b>Tier</b></td><td><span class="chip level">🟡 Data Analytics</span></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </details>
+
+    <details class="card">
+      <summary><span class="mode live">Live</span>Biz Performance Monitoring<span class="mini">2 min</span><span class="caret">▶</span></summary>
+      <div class="body">
+        <p><strong>What it is.</strong> Ongoing tracking of business health with alerting on drift - the system tells you when something moves, so you do not have to go look.</p>
+        <table class="clean">
+          <tbody>
+            <tr><td><b>Kasa example</b></td><td>An alert fires when a region's average basket size falls two weeks running, routed straight to that region's owner before it shows up in the monthly review.</td></tr>
+            <tr><td><b>Business value</b></td><td>Problems get caught while they are still small and cheap to fix, instead of surfacing a quarter late.</td></tr>
+            <tr><td><b>Reach for it when</b></td><td>You need to be told when something changes, not to remember to check a dashboard.</td></tr>
+            <tr><td><b>Tier</b></td><td><span class="chip level">🟡 Data Analytics</span></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </details>
+
+    <details class="card">
+      <summary><span class="mode self">Self-study</span>Regular Insights Sharing<span class="mini">2 min read</span><span class="caret">▶</span></summary>
+      <div class="body">
+        <p><strong>What it is.</strong> A cadenced ritual that turns data into narrative for the organization - a recurring moment where numbers become a story people act on.</p>
+        <table class="clean">
+          <tbody>
+            <tr><td><b>Kasa example</b></td><td>Sofia's monthly "three things the data says" note - short, opinionated, one chart each, sent to the whole leadership team and referenced in the next planning cycle.</td></tr>
+            <tr><td><b>Business value</b></td><td>A data culture rather than just data infrastructure. The numbers change behavior because someone tells their story on a rhythm.</td></tr>
+            <tr><td><b>Reach for it when</b></td><td>The dashboards exist and are trusted, but nobody actually acts on them.</td></tr>
+            <tr><td><b>Tier</b></td><td><span class="chip level">🟡 Data Analytics</span></td></tr>
+          </tbody>
+        </table>
+        <div class="callout tip">
+          <strong>This is the product most orgs skip</strong>
+          It has no software to buy, so it gets forgotten - and then leaders wonder why their expensive dashboards changed nothing. Insight without a ritual to deliver it stays a screen no one opens. The cadence is the product.
+        </div>
+      </div>
+    </details>
+  </section>
+
+  <!-- ============ HOMEWORK ============ -->
+  <section class="section" id="exercise">
+    <div class="section-kicker">
+      <span class="klabel">Before Session 4</span>
+      <h2>This week <span class="tag exercise">◐ 20 min total</span></h2>
+    </div>
+    <ul>
+      <li><strong>Audit one number.</strong> Pick a metric your org quotes constantly - revenue, conversion, active users. Ask two teams how they compute it. If the answers differ, you have found a metric-development gap.</li>
+      <li><strong>Find your validation gate.</strong> Is there anything stopping bad data reaching your dashboards, or does it flow straight through? If there is no gate, that is your first build.</li>
+      <li><strong>Count your dashboards.</strong> How many exist, and how many does anyone actually act on? The ratio tells you whether you have a display problem or a "run on the number" problem.</li>
+      <li><strong>Optional:</strong> sketch your own one-page executive scorecard - the four numbers you would show a board, each against a target. If you cannot fill four, you have a KPI-system gap.</li>
+    </ul>
+  </section>
+
+  <!-- ============ QUIZ ============ -->
+  <section class="section" id="quiz">
+    <div class="section-kicker">
+      <span class="klabel">Check yourself</span>
+      <h2>Three questions before you go 🎯 <span class="tag exercise">◐ 90 seconds</span></h2>
+    </div>
+    <div class="quiz-q" data-answer="1">
+      <p class="qtext">1 · Why does data validation come before dashboarding?</p>
+      <button class="qopt" type="button">A · validation is cheaper to build</button>
+      <button class="qopt" type="button">B · a dashboard on unvalidated data is a confident lie - it makes the wrong number look official</button>
+      <button class="qopt" type="button">C · dashboards do not need clean data</button>
+      <p class="qwhy">Validation is the gate at the front door. Display without trust just multiplies the argument - Kasa learned this by killing thirty of forty dashboards built on ungoverned data.</p>
+    </div>
+    <div class="quiz-q" data-answer="2">
+      <p class="qtext">2 · A dashboard and an executive scorecard differ mainly in that...</p>
+      <button class="qopt" type="button">A · a scorecard uses more colors</button>
+      <button class="qopt" type="button">B · a dashboard is for the board and a scorecard is for analysts</button>
+      <button class="qopt" type="button">C · a dashboard is to explore; a scorecard is a one-page verdict - the few numbers vs target</button>
+      <p class="qwhy">A scorecard removes everything that is not a decision. It sits at the top of the trust pyramid because every number on it was validated, defined, and laddered up from the KPI tree.</p>
+    </div>
+    <div class="quiz-q" data-answer="0">
+      <p class="qtext">3 · The "trust pyramid" says an executive scorecard is only as honest as...</p>
+      <button class="qopt" type="button">A · the metric definitions and data validation beneath it</button>
+      <button class="qopt" type="button">B · the design of the slide it lives on</button>
+      <button class="qopt" type="button">C · how senior the person presenting it is</button>
+      <p class="qwhy">Higher rests on lower: the scorecard sits on the KPI tree, which sits on metric definitions, which sit on validation. Weaken any layer and the top becomes a polished wrong answer.</p>
+    </div>
+    <p class="quiz-score"></p>
+  </section>
+
+  <!-- ============ OFFICIAL SOURCES ============ -->
+  <section class="section" id="official">
+    <div class="section-kicker">
+      <span class="klabel">Source material</span>
+      <h2>What this session covers</h2>
+    </div>
+    <p class="lede">This is a capability catalog, not a build-it-yourself course. Session 3 covers all eleven analytics products at the "what / example / value / when" level so a leader can commission them and a follower can understand them. The deep how-to - the SQL, the statistics, the Python - lives in Phoebe's sibling courses, cross-linked below.</p>
+    <div class="covered">
+      <div class="covered-row"><span class="status pill solid">✓</span><span class="name">Trust the number: validation, metric development, KPI design, dictionary scorecard</span><span class="note">Part 1 - the trust pyramid</span></div>
+      <div class="covered-row"><span class="status pill solid">✓</span><span class="name">Show the number: smart reporting, dashboarding, executive scorecard, self-serve BI</span><span class="note">Part 2 - display matched to audience</span></div>
+      <div class="covered-row"><span class="status pill solid">✓</span><span class="name">Run on the number: thematic analysis, performance monitoring, insights sharing</span><span class="note">Part 3 - analytics as a habit</span></div>
+      <div class="covered-row"><span class="status pill light">◐</span><span class="name">Writing the queries behind these metrics</span><span class="note">go deeper - learn-sql</span></div>
+      <div class="covered-row"><span class="status pill light">◐</span><span class="name">The statistics behind a trustworthy number (CIs, significance)</span><span class="note">go deeper - learn-statistics</span></div>
+      <div class="covered-row"><span class="status pill light">◐</span><span class="name">Hands-on analysis + reporting in code</span><span class="note">go deeper - learn-python-data-analysis</span></div>
+    </div>
+  </section>
+
+  <!-- ============ CHEAT SHEET ============ -->
+  <section class="cheat" id="cheatsheet">
+    <h3>Session 3 cheat sheet <span>· pin this</span></h3>
+    <div class="grid-2">
+      <div class="cheat-item"><b>The arc</b><span>Trust the number → show the number → run on the number. In that order.</span></div>
+      <div class="cheat-item"><b>Validation is the gate</b><span>No garbage reaches a dashboard. Build it before any reporting.</span></div>
+      <div class="cheat-item"><b>Trust pyramid</b><span>Validation → metric development → KPI system → executive scorecard. Higher rests on lower.</span></div>
+      <div class="cheat-item"><b>Match display to audience</b><span>Report (recurring) · dashboard (watch) · scorecard (board verdict) · self-serve (edge questions).</span></div>
+      <div class="cheat-item"><b>Scorecard = subtraction</b><span>The few numbers vs target on one page. It removes everything that is not a decision.</span></div>
+      <div class="cheat-item"><b>The forgotten product</b><span>Regular insights sharing - a ritual, not software. Without it, dashboards change nothing.</span></div>
+    </div>
+  </section>
+
+  <footer class="pagefoot">
+    <span>Session 3 of 6 · learn-data-product-with-phoebe · by Phoebe Fu &nbsp;·&nbsp; 📚 <a href="https://phoebefu6.github.io/learn-with-phoebe/">Learn with Phoebe ↗</a></span>
+    <span><a href="../index.html">← All sessions</a> &nbsp;·&nbsp; <a href="04-data-science.html">Next: Data Science →</a></span>
+  </footer>
+
+</main>
+
+<script src="../assets/app.js?v=1"></script>
+</body>
+</html>

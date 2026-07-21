@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Session 5 · Gen AI - learn data product with phoebe</title>
+<link rel="stylesheet" href="../assets/style.css?v=1">
+<style>
+  :root{ --indigo:#7C3AED; --indigo-deep:#5B21B6; --indigo-mid:#8B5CF6; --indigo-soft:#C4B5FD; --indigo-50:#F5F3FF; }
+</style>
+</head>
+<body>
+
+<div class="toolbar">
+  <div class="wrap">
+    <span class="crumb"><a href="../index.html">learn-data-product-with-phoebe</a> / Session 5 of 6</span>
+    <button class="btn" id="toggle-all" type="button">Expand all</button>
+    <button class="btn primary" id="zoom-toggle" type="button">Projector zoom: off</button>
+  </div>
+</div>
+
+<header class="masthead">
+  <div class="wrap">
+    <div class="eyebrow">Learn Data Product with Phoebe · Session 5 of 6</div>
+    <h1>Gen AI <span class="accent">- governing and amplifying the whole stack</span></h1>
+    <p class="sub">This is the hardest rung, and the most misunderstood. The gen-AI tier is not "add a chatbot" - it is two things at once: putting real governance and quality controls under everything below, and amplifying the work above with automation and agents. The twist you will feel in this session: governance and data quality are foundational and cross-cutting, yet they live here because the gen-AI era is what finally gives them teeth. LLMs and agents act on your data at scale and amplify any rot, so the "nice to have" controls become the difference between a helpful agent and a confident liar. Six products, Kasa's support agent as the flagship.</p>
+    <div class="chip-row">
+      <span class="chip level">🔴 Hardest</span>
+      <span class="chip audience">Leaders + builders</span>
+      <span class="chip audience">Catalog · light on code</span>
+      <span class="chip time">45 min</span>
+    </div>
+    <div class="agenda">
+      <span class="a1" style="flex:1">0-3 · Setup</span>
+      <span class="a2" style="flex:3">3-20 · Govern the foundation</span>
+      <span class="a3" style="flex:3">20-34 · Lift the people</span>
+      <span class="a4" style="flex:3">34-45 · Amplify the work</span>
+    </div>
+  </div>
+</header>
+
+<main class="wrap">
+
+  <!-- ============ INTRO ============ -->
+  <section class="section" id="intro">
+    <div class="section-kicker">
+      <span class="klabel">Part 0</span>
+      <h2>Why the top rung governs the whole ladder</h2>
+    </div>
+    <p class="lede">Kasa has climbed a long way: infrastructure that stores and serves, analytics you can trust, data science that predicts fraud and forecasts demand. Now leadership wants "AI" everywhere - a support bot, automated ticket triage, a fraud copilot. The gen-AI tier delivers that <strong>amplification</strong>, but it demands something first: real <strong>governance</strong> and <strong>data quality</strong> underneath. This session covers six products in three moves - govern the foundation, lift the people, amplify the work - with Kasa's "where is my order / refund me" support agent as the flagship.</p>
+    <div class="legend">
+      <span class="pill solid">Live - covered in session</span>
+      <span class="pill light">Self-study - read after</span>
+      <span class="pill amber">★ The running case: Kasa</span>
+      <span class="pill inkpill">6 products · gen-AI tier · violet</span>
+    </div>
+    <div class="callout win">
+      <strong>★ The comprehension nuance, said plainly</strong>
+      Data Governance and Data Quality are <em>foundational and cross-cutting</em> - they touch every tier of the ladder, not just this one. So why are they parked in the gen-AI tier? Because the gen-AI era is what finally gives them teeth and urgency. When only humans read a dashboard, weak governance is a slow-burning risk. When LLMs and agents act on your data at scale - drafting board notes, issuing refunds, emailing customers - they amplify any rot instantly and confidently. Governance stops being optional the moment software acts on your behalf. That is the honest reason these two live here: not because they are new, but because gen AI is what makes ignoring them dangerous.
+    </div>
+  </section>
+
+  <!-- ============ PART 1: GOVERN THE FOUNDATION ============ -->
+  <section class="section" id="govern">
+    <div class="section-kicker">
+      <span class="klabel">Part 1 · govern the foundation</span>
+      <h2>The controls that earn the right to automate <span class="tag concept">17 min live</span></h2>
+    </div>
+    <p class="lede">Before Kasa lets any agent act, two products have to be solid: <strong>Data Governance</strong> (who owns what, who may touch it, how it is protected) and a <strong>Data Quality Scorecard</strong> (a live health score that gates what the AI may use). Both are foundational and cross-cutting - they run through the whole stack - but they get real teeth here, because gen AI acts on data at machine speed and amplifies whatever it finds.</p>
+
+    <figure class="zoomable">
+      <svg viewBox="0 0 880 360" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Governance and data quality run as a vertical spine through all four maturity tiers, shown as faint horizontal bars, gaining teeth in the gen-AI era at the top">
+        <style>
+          .gsT { font: 800 14px Inter, sans-serif; fill: #FFFFFF; }
+          .gsB { font: 600 12px Inter, sans-serif; fill: #6B6785; }
+          .gsL { font: 700 12px Inter, sans-serif; fill: #1E1B3A; }
+          .gsN { font: 600 11px Inter, sans-serif; fill: #6B6785; }
+          .gsG { font: 800 12px Inter, sans-serif; fill: #FFFFFF; }
+          .gsGn { font: 700 11px Inter, sans-serif; fill: #1A2E05; }
+        </style>
+        <!-- four faint tier bars -->
+        <rect x="30" y="288" width="620" height="46" rx="9" fill="#F1F5F9" stroke="#C7C4DE"/>
+        <text class="gsB" x="50" y="316">Infrastructure - store + serve</text>
+        <rect x="30" y="232" width="620" height="46" rx="9" fill="#F0FDFA" stroke="#C7C4DE"/>
+        <text class="gsB" x="50" y="260">Data Analytics - measure + explain</text>
+        <rect x="30" y="176" width="620" height="46" rx="9" fill="#EEF2FF" stroke="#C7C4DE"/>
+        <text class="gsB" x="50" y="204">Data Science - predict + personalize</text>
+        <rect x="30" y="120" width="620" height="46" rx="9" fill="#F5F3FF" stroke="#C4B5FD"/>
+        <text class="gsL" x="50" y="148" style="fill:#5B21B6">Gen AI - govern + amplify (teeth here)</text>
+        <!-- the spine running vertically through all four -->
+        <rect x="668" y="120" width="90" height="214" rx="12" fill="#7C3AED"/>
+        <text class="gsT" x="713" y="220" text-anchor="middle" transform="rotate(90 713 227)">Governance + Data Quality</text>
+        <!-- teeth marker at gen-AI level -->
+        <rect x="776" y="120" width="74" height="46" rx="9" fill="#5B21B6"/>
+        <text class="gsG" x="813" y="140" text-anchor="middle">real</text>
+        <text class="gsG" x="813" y="156" text-anchor="middle">teeth</text>
+        <!-- connector arrows from spine into each tier -->
+        <line x1="668" y1="311" x2="654" y2="311" stroke="#8B5CF6" stroke-width="2.5" marker-end="url(#gsAh)"/>
+        <line x1="668" y1="255" x2="654" y2="255" stroke="#8B5CF6" stroke-width="2.5" marker-end="url(#gsAh)"/>
+        <line x1="668" y1="199" x2="654" y2="199" stroke="#8B5CF6" stroke-width="2.5" marker-end="url(#gsAh)"/>
+        <line x1="668" y1="143" x2="654" y2="143" stroke="#8B5CF6" stroke-width="2.5" marker-end="url(#gsAh)"/>
+        <defs>
+          <marker id="gsAh" markerWidth="9" markerHeight="9" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6" fill="none" stroke="#8B5CF6" stroke-width="1.6"/></marker>
+        </defs>
+        <text class="gsL" x="30" y="40">Foundational, cross-cutting - teeth in the gen-AI era</text>
+        <text class="gsN" x="30" y="62">Governance and data quality touch every tier (the spine). They only become urgent once software - not just people - acts on the data.</text>
+        <!-- note square -->
+        <rect x="30" y="82" width="14" height="14" rx="3" fill="#84CC16"/>
+        <text class="gsGn" x="52" y="93" style="fill:#1E1B3A">Takeaway: not new to the gen-AI tier - just no longer optional once agents act at scale.</text>
+      </svg>
+      <figcaption>🔍 Click to zoom - governance and data quality as a spine through all four tiers, gaining teeth at the top</figcaption>
+    </figure>
+
+    <details class="card" open>
+      <summary><span class="mode live">Live</span>Data Governance<span class="mini">5 min</span><span class="caret">▶</span></summary>
+      <div class="body">
+        <table class="clean">
+          <tbody>
+            <tr><td><b>What it is</b></td><td>The policies, roles, and controls for how data is owned, accessed, protected, and used - the rulebook that says who may touch what, and how it is kept safe.</td></tr>
+            <tr><td><b>Kasa example</b></td><td>PDPA-compliant access and full lineage on Kasa Pay wallet data - so the support agent can only see what policy allows, and every access is traceable.</td></tr>
+            <tr><td><b>Business value</b></td><td>Trust, compliance, and safe AI. It is the licence to automate at all in a regulated fintech.</td></tr>
+            <tr><td><b>Reach for it when</b></td><td>Data is regulated, shared across teams, or feeding AI. In practice: the moment agents or LLMs start acting on it.</td></tr>
+            <tr><td><b>Tier chip</b></td><td><span class="tag concept">🔴 Gen AI · foundational, teeth here</span></td></tr>
+          </tbody>
+        </table>
+        <div class="callout tip">
+          <strong>Why governance is parked in the gen-AI tier - not papered over</strong>
+          Governance is genuinely foundational and cross-cutting; it belongs under every rung. It sits here because the gen-AI era is what makes it unignorable. A human reading an ungoverned dashboard is a slow risk. An agent acting on ungoverned data - issuing refunds, emailing customers, drafting board notes - amplifies any rot instantly and at scale. Gen AI does not create the need for governance; it removes the option of skipping it.
+        </div>
+      </div>
+    </details>
+
+    <details class="card">
+      <summary><span class="mode live">Live</span>Data Quality Scorecard<span class="mini">4 min</span><span class="caret">▶</span></summary>
+      <div class="body">
+        <table class="clean">
+          <tbody>
+            <tr><td><b>What it is</b></td><td>A live health score of your data across completeness, accuracy, and timeliness - quality made visible, tracked, and reportable rather than assumed.</td></tr>
+            <tr><td><b>Kasa example</b></td><td>A quality score that gates what the AI agent is allowed to use - if the order table is stale or incomplete, the agent falls back to a human instead of answering on rotten data.</td></tr>
+            <tr><td><b>Business value</b></td><td>Quality becomes visible and fundable - leaders can see the number, so they can pay to fix it. It also becomes the safety gate for automation.</td></tr>
+            <tr><td><b>Reach for it when</b></td><td>Quality problems keep surfacing downstream, or you are about to let software act on data automatically.</td></tr>
+            <tr><td><b>Tier chip</b></td><td><span class="tag concept">🔴 Gen AI · foundational, teeth here</span></td></tr>
+          </tbody>
+        </table>
+        <div class="callout tip">
+          <strong>The scorecard is the agent's seatbelt</strong>
+          Like governance, data quality is cross-cutting - it matters at every tier. But in the gen-AI era it becomes a live gate: the agent reads the quality score before it acts. Green, it answers; red, it escalates. That single check is what stops "amplify the work" from becoming "amplify the errors".
+        </div>
+      </div>
+    </details>
+  </section>
+
+  <!-- ============ PART 2: LIFT THE PEOPLE ============ -->
+  <section class="section" id="people">
+    <div class="section-kicker">
+      <span class="klabel">Part 2 · lift the people</span>
+      <h2>Before you deploy AI, get the org ready for it <span class="tag concept">14 min live</span></h2>
+    </div>
+    <p class="lede">Governance earns the right to automate; people decide whether it lands. Two products lift the human side: <strong>AI Literacy Training</strong> (so staff use and question AI safely) and an <strong>AI Use Case Discovery Workshop</strong> (so the org spends on the right ideas, not the loudest). Both are cheap relative to the automation they de-risk.</p>
+
+    <details class="card">
+      <summary><span class="mode live">Live</span>AI Literacy Training<span class="mini">3 min</span><span class="caret">▶</span></summary>
+      <div class="body">
+        <table class="clean">
+          <tbody>
+            <tr><td><b>What it is</b></td><td>Lifting the whole org's ability to use and question AI safely - not just prompt tricks, but knowing when the model is likely wrong and when not to trust it.</td></tr>
+            <tr><td><b>Kasa example</b></td><td>Staff learn prompt basics and, more importantly, when NOT to trust the model - so a store manager double-checks a generated figure instead of pasting it into a board pack.</td></tr>
+            <tr><td><b>Business value</b></td><td>Adoption without incidents. The org gets the upside of AI tools without the confident-wrong-answer disasters.</td></tr>
+            <tr><td><b>Reach for it when</b></td><td>Everyone suddenly has AI tools - copilots in every app - and nobody has taught them the failure modes.</td></tr>
+            <tr><td><b>Tier chip</b></td><td><span class="tag concept">🔴 Gen AI · human on-ramp</span></td></tr>
+          </tbody>
+        </table>
+        <div class="callout tip">
+          <strong>Literacy is the sibling of Session 4's data literacy</strong>
+          Data literacy taught the org to read a number; AI literacy teaches it to question a generated answer. Same pattern - lift the people before the tools outrun them. Go deeper in Phoebe's <em>learn-ai-literacy</em> course.
+        </div>
+      </div>
+    </details>
+
+    <details class="card">
+      <summary><span class="mode live">Live</span>AI Use Case Discovery Workshop<span class="mini">4 min</span><span class="caret">▶</span></summary>
+      <div class="body">
+        <table class="clean">
+          <tbody>
+            <tr><td><b>What it is</b></td><td>A structured session that finds and prioritizes AI opportunities by value and feasibility - turning "we should use AI" into a ranked, fundable shortlist.</td></tr>
+            <tr><td><b>Kasa example</b></td><td>Score 20 candidate ideas on a value-vs-feasibility grid, then pick the two that win: the support bot and a fraud copilot for the Kasa Pay risk team.</td></tr>
+            <tr><td><b>Business value</b></td><td>Focus and buy-in before spend. It kills pet projects early and gets leadership aligned on where the money goes.</td></tr>
+            <tr><td><b>Reach for it when</b></td><td>Leadership says "we should use AI" with no plan, or every team is lobbying for its own pet model.</td></tr>
+            <tr><td><b>Tier chip</b></td><td><span class="tag concept">🔴 Gen AI · prioritization</span></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </details>
+  </section>
+
+  <!-- ============ PART 3: AMPLIFY THE WORK ============ -->
+  <section class="section" id="amplify">
+    <div class="section-kicker">
+      <span class="klabel">Part 3 · amplify the work</span>
+      <h2>Where gen AI actually does the work <span class="tag concept">11 min live</span></h2>
+    </div>
+    <p class="lede">Now the payoff. With governance under it and people ready, Kasa amplifies real work: <strong>Workflow Automation</strong> handles the repetitive, rule-ish steps, and <strong>Agentic AI</strong> - the flagship - plans and acts across tools toward a goal, with guardrails. This is the top of the ladder, and it only holds because every rung beneath it is solid.</p>
+
+    <figure class="zoomable">
+      <svg viewBox="0 0 880 380" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="The agentic loop: goal to plan to tool calls to guardrail check to act to observe, cycling back, sitting on top of a governance and guardrail layer">
+        <style>
+          .alT { font: 800 13px Inter, sans-serif; fill: #FFFFFF; }
+          .alS { font: 600 11px Inter, sans-serif; fill: #FFFFFF; }
+          .alL { font: 700 12px Inter, sans-serif; fill: #1E1B3A; }
+          .alN { font: 600 11px Inter, sans-serif; fill: #6B6785; }
+          .alA { stroke: #7C3AED; stroke-width: 2.5; fill: none; marker-end: url(#alAh); }
+          .alG { font: 800 12px Inter, sans-serif; fill: #FFFFFF; }
+        </style>
+        <defs>
+          <marker id="alAh" markerWidth="9" markerHeight="9" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6" fill="none" stroke="#7C3AED" stroke-width="1.6"/></marker>
+        </defs>
+        <text class="alL" x="30" y="34">The agentic loop - Kasa's "where is my order / refund me" support agent</text>
+        <!-- six nodes around a loop -->
+        <rect x="360" y="52" width="160" height="44" rx="11" fill="#5B21B6"/><text class="alT" x="440" y="79" text-anchor="middle">1 · Goal</text>
+        <rect x="620" y="118" width="160" height="44" rx="11" fill="#7C3AED"/><text class="alT" x="700" y="145" text-anchor="middle">2 · Plan</text>
+        <rect x="620" y="216" width="160" height="44" rx="11" fill="#8B5CF6"/><text class="alT" x="700" y="238" text-anchor="middle">3 · Tool calls</text><text class="alS" x="700" y="252" text-anchor="middle">check order, lookup policy</text>
+        <rect x="360" y="282" width="160" height="44" rx="11" fill="#7C3AED"/><text class="alT" x="440" y="304" text-anchor="middle">4 · Guardrail check</text><text class="alS" x="440" y="318" text-anchor="middle">within policy + quality green?</text>
+        <rect x="100" y="216" width="160" height="44" rx="11" fill="#8B5CF6"/><text class="alT" x="180" y="238" text-anchor="middle">5 · Act</text><text class="alS" x="180" y="252" text-anchor="middle">refund or escalate</text>
+        <rect x="100" y="118" width="160" height="44" rx="11" fill="#7C3AED"/><text class="alT" x="180" y="145" text-anchor="middle">6 · Observe</text>
+        <!-- loop arrows -->
+        <path class="alA" d="M520,74 C600,80 660,96 690,116"/>
+        <path class="alA" d="M700,162 L700,214"/>
+        <path class="alA" d="M660,260 C600,290 560,300 522,304"/>
+        <path class="alA" d="M360,304 C300,300 260,286 236,262"/>
+        <path class="alA" d="M180,216 L180,164"/>
+        <path class="alA" d="M220,120 C280,86 320,80 358,76"/>
+        <!-- governance/guardrail layer underneath -->
+        <rect x="100" y="342" width="680" height="30" rx="9" fill="#84CC16"/>
+        <text class="alG" x="440" y="362" text-anchor="middle" style="fill:#1A2E05">Governance + quality guardrail layer - the agent acts only inside it</text>
+        <!-- note square -->
+        <rect x="30" y="150" width="14" height="14" rx="3" fill="#84CC16"/>
+        <text class="alN" x="30" y="190" style="width:60px">Human</text>
+        <text class="alN" x="30" y="204">in loop</text>
+        <text class="alN" x="30" y="218">for risk</text>
+      </svg>
+      <figcaption>🔍 Click to zoom - the agentic loop cycling goal to observe, always inside a governance and guardrail layer</figcaption>
+    </figure>
+
+    <details class="card">
+      <summary><span class="mode live">Live</span>Workflow Automation<span class="mini">3 min</span><span class="caret">▶</span></summary>
+      <div class="body">
+        <table class="clean">
+          <tbody>
+            <tr><td><b>What it is</b></td><td>AI and rules automating a repeatable multi-step process end to end - the steps a person used to click through by hand.</td></tr>
+            <tr><td><b>Kasa example</b></td><td>Auto-triage of incoming support tickets plus AI-drafted replies - the ticket is classified, routed, and a suggested response is waiting for the agent to approve.</td></tr>
+            <tr><td><b>Business value</b></td><td>Hours saved and faster response times, with humans reviewing rather than typing from scratch.</td></tr>
+            <tr><td><b>Reach for it when</b></td><td>A process is repetitive and rule-ish - the same steps, most of the time, with clear inputs and outputs.</td></tr>
+            <tr><td><b>Tier chip</b></td><td><span class="tag concept">🔴 Gen AI · amplify</span></td></tr>
+          </tbody>
+        </table>
+        <div class="callout example">
+          <span class="ex-pill">Real world</span>
+          <p>Kasa's support queue used to pile up overnight - every ticket read, sorted, and answered by hand each morning. Workflow automation now triages each ticket the moment it lands (billing, delivery, returns, fraud), routes it to the right queue, and drafts a reply from the knowledge base. Agents open their morning to a sorted queue with drafts to approve, not a wall of unread tickets. First-response time dropped from hours to minutes, and no ticket falls through the cracks. Crucially, it is still rule-ish - a fixed process, faster - which is exactly the line between automation and the agentic AI below.</p>
+        </div>
+      </div>
+    </details>
+
+    <details class="card">
+      <summary><span class="mode live">Live</span>Agentic AI <span class="mini">★ flagship · 4 min</span><span class="caret">▶</span></summary>
+      <div class="body">
+        <table class="clean">
+          <tbody>
+            <tr><td><b>What it is</b></td><td>AI that plans and acts across tools and steps toward a goal, with guardrails - it decides what to do next, not just fills in a fixed script.</td></tr>
+            <tr><td><b>Kasa example</b></td><td>The support agent behind the app: a customer asks "where is my order?" and it checks order status across systems; "refund me" and it issues the refund if it is within policy, and escalates the edge cases to a human.</td></tr>
+            <tr><td><b>Business value</b></td><td>24/7 resolution with a human in the loop for anything risky - lower cost to serve, faster answers, and staff freed for the hard cases.</td></tr>
+            <tr><td><b>Reach for it when</b></td><td>Automation needs judgment and tool use, not a fixed script - the path branches, and the right next step depends on what the last step found.</td></tr>
+            <tr><td><b>Tier chip</b></td><td><span class="tag concept">🔴 Gen AI · flagship, top of the ladder</span></td></tr>
+          </tbody>
+        </table>
+        <div class="callout example">
+          <span class="ex-pill">Real world</span>
+          <p>This is why the whole ladder had to be climbed first. Kasa's support agent can safely say "I have refunded your order" only because the warehouse tells it the true order status, the data-quality scorecard is green, and governance defines exactly what a refund within policy means and how much it may issue without a human. The guardrail check in the loop is not decoration - it is the difference between a helpful agent and one that confidently refunds a fraudster. Pull out any lower rung and the agent acts fluently on fiction. That dependency is the entire argument of this course, and it lands hardest right here at the top.</p>
+        </div>
+      </div>
+    </details>
+  </section>
+
+  <!-- ============ HOMEWORK ============ -->
+  <section class="section" id="exercise">
+    <div class="section-kicker">
+      <span class="klabel">Before Session 6</span>
+      <h2>This week <span class="tag exercise">◐ 25 min total</span></h2>
+    </div>
+    <ul>
+      <li><strong>Audit your governance teeth.</strong> Name one dataset an AI tool at your org can already act on. Is access governed and lineage traceable, or would you find out only after something went wrong? That gap is your teeth-in-the-gen-AI-era test.</li>
+      <li><strong>Draw your quality gate.</strong> Pick one place you would let software act automatically. What single data-quality check should block it when the data is stale or incomplete? Write the green-answer / red-escalate rule.</li>
+      <li><strong>Run a mini use-case grid.</strong> List three "we should use AI" ideas floating around your org and place them on value-vs-feasibility. Which one actually wins, and which is just loud?</li>
+      <li><strong>Optional:</strong> map one repetitive process (triage, reporting, replies) and mark where it is rule-ish (workflow automation) versus where it needs judgment and branching (agentic AI). The line between them is the lesson.</li>
+    </ul>
+  </section>
+
+  <!-- ============ QUIZ ============ -->
+  <section class="section" id="quiz">
+    <div class="section-kicker">
+      <span class="klabel">Check yourself</span>
+      <h2>Three questions before you go 🎯 <span class="tag exercise">◐ 90 seconds</span></h2>
+    </div>
+    <div class="quiz-q" data-answer="2">
+      <p class="qtext">1 · Data Governance and Data Quality are foundational and cross-cutting. Why are they taught in the gen-AI tier?</p>
+      <button class="qopt" type="button">A · they were invented alongside gen AI</button>
+      <button class="qopt" type="button">B · they only matter once you have an AI model</button>
+      <button class="qopt" type="button">C · they run through every tier, but the gen-AI era gives them teeth - agents act on data at scale and amplify any rot</button>
+      <p class="qwhy">Governance and quality touch every rung of the ladder. They live in the gen-AI tier because gen AI is what makes ignoring them dangerous: when software acts on your behalf, weak controls get amplified instantly and confidently.</p>
+    </div>
+    <div class="quiz-q" data-answer="0">
+      <p class="qtext">2 · What separates Workflow Automation from Agentic AI?</p>
+      <button class="qopt" type="button">A · automation runs a fixed, rule-ish process; an agent plans and decides its next step across tools toward a goal</button>
+      <button class="qopt" type="button">B · automation uses AI and agents do not</button>
+      <button class="qopt" type="button">C · agents are cheaper to build than automation</button>
+      <p class="qwhy">Workflow automation speeds up a repeatable, mostly-fixed process (triage + draft replies). Agentic AI is for when the path branches and the right next action depends on what the last step found - it needs judgment and tool use, not a script.</p>
+    </div>
+    <div class="quiz-q" data-answer="1">
+      <p class="qtext">3 · Kasa's support agent can safely say "I have refunded your order" only because...</p>
+      <button class="qopt" type="button">A · the language model is very large</button>
+      <button class="qopt" type="button">B · the warehouse gives it true order status, the quality scorecard is green, and governance defines what a refund within policy means</button>
+      <button class="qopt" type="button">C · a human reads every message first</button>
+      <p class="qwhy">The agent sits at the top of the ladder and depends on every rung below. The guardrail check - within policy and quality green - is the difference between a helpful agent and one that confidently refunds a fraudster.</p>
+    </div>
+    <p class="quiz-score"></p>
+  </section>
+
+  <!-- ============ OFFICIAL SOURCES ============ -->
+  <section class="section" id="official">
+    <div class="section-kicker">
+      <span class="klabel">Source material</span>
+      <h2>What this session covers</h2>
+    </div>
+    <p class="lede">This is a capability catalog, not a build-it-yourself course. Session 5 covers the six gen-AI products at the "what / example / value / when" level so a leader can commission them and a follower can understand them. The deep how-to - governance frameworks, AI literacy curricula, RAG and agent construction, evaluation - lives in Phoebe's other courses, cross-linked below.</p>
+    <div class="covered">
+      <div class="covered-row"><span class="status pill solid">✓</span><span class="name">Data Governance + Data Quality Scorecard</span><span class="note">Part 1 - foundational, teeth in the gen-AI era</span></div>
+      <div class="covered-row"><span class="status pill solid">✓</span><span class="name">AI Literacy Training + AI Use Case Discovery Workshop</span><span class="note">Part 2 - lift the people before the tools</span></div>
+      <div class="covered-row"><span class="status pill solid">✓</span><span class="name">Workflow Automation + Agentic AI (Kasa support agent)</span><span class="note">Part 3 - amplify the work, flagship agentic loop</span></div>
+      <div class="covered-row"><span class="status pill light">◐</span><span class="name">Governance frameworks (PDPA / GDPR / AI Act, ISO 42001)</span><span class="note">go deeper - learn-data-governance</span></div>
+      <div class="covered-row"><span class="status pill light">◐</span><span class="name">Using and questioning AI safely, hands-on</span><span class="note">go deeper - learn-ai-literacy</span></div>
+      <div class="covered-row"><span class="status pill light">◐</span><span class="name">Building retrieval + agents (RAG, tool use, orchestration)</span><span class="note">go deeper - learn-rag · learn-langchain</span></div>
+      <div class="covered-row"><span class="status pill light">◐</span><span class="name">Evaluating agents and quality gates before you trust them</span><span class="note">go deeper - learn-evals</span></div>
+    </div>
+  </section>
+
+  <!-- ============ CHEAT SHEET ============ -->
+  <section class="cheat" id="cheatsheet">
+    <h3>Session 5 cheat sheet <span>· pin this</span></h3>
+    <div class="grid-2">
+      <div class="cheat-item"><b>Data Governance</b><span>Who owns / may touch / how protected. Foundational, but teeth in the gen-AI era. Reach when: data is regulated, shared, or feeding AI.</span></div>
+      <div class="cheat-item"><b>Data Quality Scorecard</b><span>Live health score that gates what AI may use. The agent's seatbelt: green = act, red = escalate. Reach when: quality issues keep surfacing downstream.</span></div>
+      <div class="cheat-item"><b>AI Literacy Training</b><span>Use and question AI safely - especially when NOT to trust it. Adoption without incidents. Reach when: everyone suddenly has AI tools.</span></div>
+      <div class="cheat-item"><b>AI Use Case Discovery</b><span>Rank ideas on value vs feasibility before you spend. Focus + buy-in. Reach when: "we should use AI" with no plan.</span></div>
+      <div class="cheat-item"><b>Workflow Automation</b><span>Automate a repeatable, rule-ish process (triage + draft replies). Hours saved. Reach when: same steps, most of the time.</span></div>
+      <div class="cheat-item"><b>Agentic AI ★</b><span>Plans + acts across tools with guardrails (Kasa support agent). 24/7 resolution, human-in-loop. Reach when: automation needs judgment, not a script.</span></div>
+    </div>
+  </section>
+
+  <footer class="pagefoot">
+    <span>Session 5 of 6 · learn-data-product-with-phoebe · by Phoebe Fu &nbsp;·&nbsp; 📚 <a href="https://phoebefu6.github.io/learn-with-phoebe/">Learn with Phoebe ↗</a></span>
+    <span><a href="../index.html">← All sessions</a> &nbsp;·&nbsp; <a href="06-composing-the-platform.html">Next: Composing the platform →</a></span>
+  </footer>
+
+</main>
+
+<script src="../assets/app.js?v=1"></script>
+</body>
+</html>

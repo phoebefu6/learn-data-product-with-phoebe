@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Session 4 · Data Science - learn data product with phoebe</title>
+<link rel="stylesheet" href="../assets/style.css?v=1">
+</head>
+<body>
+
+<div class="toolbar">
+  <div class="wrap">
+    <span class="crumb"><a href="../index.html">learn-data-product-with-phoebe</a> / Session 4 of 6</span>
+    <button class="btn" id="toggle-all" type="button">Expand all</button>
+    <button class="btn primary" id="zoom-toggle" type="button">Projector zoom: off</button>
+  </div>
+</div>
+
+<header class="masthead">
+  <div class="wrap">
+    <div class="eyebrow">Learn Data Product with Phoebe · Session 4 of 6</div>
+    <h1>Data Science <span class="accent">- from what happened to what happens next</span></h1>
+    <p class="sub">The bottom two tiers told Kasa the truth about the past: where its data lives, and what the numbers say. This tier crosses the line into prediction and personalization - grouping customers to act on, forecasting demand before it arrives, and scoring live transactions for fraud faster than any rule list can. Five products, one marquee example (fraud detection on Kasa Pay), and one meta-lesson that separates a clever notebook from a durable product: a model only earns the word "product" when it is deployed, owned, monitored, and retrained. This tier stands on trustworthy analytics - predict on a shaky number and you industrialize the error.</p>
+    <div class="chip-row">
+      <span class="chip level">🟠 Advanced</span>
+      <span class="chip audience">Leaders + builders</span>
+      <span class="chip audience">Catalog · light on code</span>
+      <span class="chip time">45 min</span>
+    </div>
+    <div class="agenda">
+      <span class="a1" style="flex:1">0-3 · Setup</span>
+      <span class="a2" style="flex:4">3-20 · Understand + group</span>
+      <span class="a3" style="flex:4">20-40 · Predict + productionize</span>
+      <span class="a4" style="flex:1">40-45 · Wrap</span>
+    </div>
+  </div>
+</header>
+
+<main class="wrap">
+
+  <!-- ============ INTRO ============ -->
+  <section class="section" id="intro">
+    <div class="section-kicker">
+      <span class="klabel">Part 0</span>
+      <h2>The tier where data starts to look forward</h2>
+    </div>
+    <p class="lede">Infrastructure stored Kasa's data; analytics made the numbers trustworthy. Both answer "what happened?" <strong>Data science</strong> answers the harder pair - "what will happen?" and "who should we treat differently?" This is the 🟠 <strong>advanced</strong> tier, and it holds five products: <strong>data literacy training</strong> (the human on-ramp), <strong>customer segmentation</strong>, <strong>sales forecasting</strong>, <strong>machine learning</strong> (with fraud detection as the flagship), and the meta-lesson <strong>data product</strong> - the idea that a model is only a product once it ships and stays alive. Each card keeps the same shape you have read three sessions running: what it is, a Kasa example, the business value, and the trigger that tells you it is time to build.</p>
+    <div class="legend">
+      <span class="pill solid">Live - covered in session</span>
+      <span class="pill light">Self-study - read after</span>
+      <span class="pill amber">★ The running case: Kasa</span>
+      <span class="pill inkpill">5 products · Data Science tier · 🟠 advanced</span>
+    </div>
+    <div class="callout win">
+      <strong>★ What you walk out with today</strong>
+      A clear line between descriptive and predictive work, and the vocabulary to commission it: when segmentation beats "treat everyone the same", when a forecast is worth more than a gut feel, and why the fraud model on Kasa Pay is only valuable because it runs live with a feedback loop. Most of all, the discipline that a model in a notebook is worth zero - a data <em>product</em> is deployed, owned, monitored, and retrained.
+    </div>
+  </section>
+
+  <!-- ============ PART 1: UNDERSTAND + GROUP ============ -->
+  <section class="section" id="understand">
+    <div class="section-kicker">
+      <span class="klabel">Part 1 · understand + group</span>
+      <h2>Lift the people, then group the customers <span class="tag concept">17 min live</span></h2>
+    </div>
+    <p class="lede">Before Kasa predicts anything, two things have to be true: the people reading the outputs must be able to question them, and the customers must stop being treated as one undifferentiated blob. The first product here, <strong>data literacy training</strong>, is honestly cross-cutting - it serves every tier. Phoebe places it in data science on purpose: it is the human on-ramp to the predictive tier, where confidence intervals, false-positive rates and model drift start to matter and a mean is no longer enough. The second, <strong>customer segmentation</strong>, is the gentlest form of "learning from data" - grouping the loyalty base so the right offer reaches the right person.</p>
+
+    <details class="card" open>
+      <summary><span class="mode live">Live</span>Data literacy training<span class="mini">the human on-ramp · 4 min</span><span class="caret">▶</span></summary>
+      <div class="body">
+        <table class="clean">
+          <tbody>
+            <tr><td><b>What it is</b></td><td>A structured lift in the organization's ability to read, question, and use data - not a tool rollout, a capability rollout.</td></tr>
+            <tr><td><b>Kasa example</b></td><td>Store managers learn to read a confidence interval, not just a mean; to ask "how fresh is this?" and "what is the sample?" before acting on a dashboard.</td></tr>
+            <tr><td><b>Business value</b></td><td>Better decisions everywhere, and a prerequisite for both self-serve BI and safe AI - the tools only pay off if people can use them well.</td></tr>
+            <tr><td><b>Reach for it when</b></td><td>Your tools outrun your people's ability to use them - dashboards go unquestioned, or misread.</td></tr>
+            <tr><td><b>Tier</b></td><td><span class="pill solid">🟠 Data Science</span> <span class="pill inkpill">but cross-cutting</span></td></tr>
+          </tbody>
+        </table>
+        <div class="callout tip">
+          <strong>Why literacy sits in the data science tier</strong>
+          Be honest with your team about this one: data literacy is not <em>only</em> a data science product - it underwrites analytics, governance and gen AI too. Phoebe files it here because this is the rung where the stakes of misreading data climb sharply. Once you are acting on a forecast or a fraud score, "the average looks fine" is not good enough - people need to reason about uncertainty, base rates, and error costs. Literacy is the human on-ramp to the predictive tier.
+        </div>
+      </div>
+    </details>
+
+    <details class="card">
+      <summary><span class="mode live">Live</span>Customer segmentation<span class="mini">4 min</span><span class="caret">▶</span></summary>
+      <div class="body">
+        <table class="clean">
+          <tbody>
+            <tr><td><b>What it is</b></td><td>Grouping customers by behavior and value so each group can be treated differently - the first honest step from "descriptive" toward "learned from data".</td></tr>
+            <tr><td><b>Kasa example</b></td><td>RFM (recency, frequency, monetary) plus k-means on the loyalty base yields 6 actionable CRM segments - VIPs, regulars, at-risk, dormant, and two in between.</td></tr>
+            <tr><td><b>Business value</b></td><td>Right offer, right customer, higher ROI - marketing stops spraying one message at 4M people and starts spending where it converts.</td></tr>
+            <tr><td><b>Reach for it when</b></td><td>You treat all customers the same - one newsletter, one discount, one journey - and returns are flattening.</td></tr>
+            <tr><td><b>Tier</b></td><td><span class="pill solid">🟠 Data Science</span></td></tr>
+          </tbody>
+        </table>
+
+        <figure class="zoomable">
+          <svg viewBox="0 0 880 420" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="A scatter plot of customers by purchase frequency against spend, with four labeled clusters: VIPs high on both, regulars in the middle, at-risk lower, and dormant near the origin">
+            <style>
+              .segAx { stroke: #C7C4DE; stroke-width: 2; }
+              .segLab { font: 700 12px Inter, sans-serif; fill: #1E1B3A; }
+              .segTk { font: 600 11px Inter, sans-serif; fill: #6B6785; }
+              .segTag { font: 800 13px Inter, sans-serif; fill: #FFFFFF; }
+              .segCap { font: 600 11px Inter, sans-serif; fill: #6B6785; }
+              .segN { font: 600 11px Inter, sans-serif; fill: #1E1B3A; }
+            </style>
+            <!-- axes -->
+            <line class="segAx" x1="90" y1="40" x2="90" y2="340"/>
+            <line class="segAx" x1="90" y1="340" x2="820" y2="340"/>
+            <text class="segLab" x="60" y="30" transform="rotate(0 60 30)">spend →</text>
+            <text class="segLab" x="740" y="366">frequency →</text>
+            <text class="segTk" x="52" y="60">high</text>
+            <text class="segTk" x="52" y="336">low</text>
+            <text class="segTk" x="96" y="360">rare</text>
+            <text class="segTk" x="770" y="360">frequent</text>
+            <!-- dormant: low freq, low spend (near origin) -->
+            <circle cx="150" cy="300" r="9" fill="#A5B4FC"/><circle cx="180" cy="315" r="9" fill="#A5B4FC"/>
+            <circle cx="135" cy="320" r="9" fill="#A5B4FC"/><circle cx="200" cy="295" r="9" fill="#A5B4FC"/>
+            <circle cx="165" cy="285" r="9" fill="#A5B4FC"/>
+            <rect x="120" y="248" width="118" height="26" rx="8" fill="#A5B4FC"/><text class="segTag" x="134" y="266" style="fill:#1E1B3A">Dormant</text>
+            <!-- at-risk: were spenders, now infrequent (high spend, low freq) -->
+            <circle cx="200" cy="130" r="9" fill="#6366F1"/><circle cx="235" cy="150" r="9" fill="#6366F1"/>
+            <circle cx="175" cy="160" r="9" fill="#6366F1"/><circle cx="250" cy="120" r="9" fill="#6366F1"/>
+            <circle cx="215" cy="175" r="9" fill="#6366F1"/>
+            <rect x="150" y="80" width="120" height="26" rx="8" fill="#6366F1"/><text class="segTag" x="164" y="98">At-risk</text>
+            <!-- regulars: mid freq, mid spend -->
+            <circle cx="470" cy="215" r="9" fill="#4F46E5"/><circle cx="500" cy="235" r="9" fill="#4F46E5"/>
+            <circle cx="445" cy="240" r="9" fill="#4F46E5"/><circle cx="515" cy="205" r="9" fill="#4F46E5"/>
+            <circle cx="485" cy="255" r="9" fill="#4F46E5"/><circle cx="455" cy="200" r="9" fill="#4F46E5"/>
+            <rect x="430" y="160" width="120" height="26" rx="8" fill="#4F46E5"/><text class="segTag" x="444" y="178">Regulars</text>
+            <!-- VIPs: high freq, high spend (top right) -->
+            <circle cx="700" cy="95" r="9" fill="#3730A3"/><circle cx="735" cy="110" r="9" fill="#3730A3"/>
+            <circle cx="675" cy="120" r="9" fill="#3730A3"/><circle cx="750" cy="85" r="9" fill="#3730A3"/>
+            <circle cx="715" cy="135" r="9" fill="#3730A3"/>
+            <rect x="660" y="48" width="110" height="26" rx="8" fill="#3730A3"/><text class="segTag" x="674" y="66">VIPs</text>
+            <!-- note -->
+            <rect x="90" y="386" width="14" height="14" rx="3" fill="#84CC16"/>
+            <text class="segN" x="112" y="397">Same customers, four playbooks: win VIPs' loyalty, grow regulars, rescue at-risk before they leave, and win back dormant cheaply.</text>
+          </svg>
+          <figcaption>🔍 Click to zoom - a segmentation scatter: spend vs frequency, four groups, four different actions</figcaption>
+        </figure>
+
+        <div class="callout example">
+          <span class="ex-pill">Real world</span>
+          <p>Kasa was mailing the same 15%-off code to all 4M loyalty members every fortnight. Segmentation showed the VIPs did not need a discount (they buy anyway - the code just gave away margin), while the at-risk group needed a reason to return, not a coupon. Deng's 6 segments let marketing cut promo spend and lift redemption at the same time - the campaign that used to lose margin on VIPs now protects it, and win-back finally targets the people actually drifting away.</p>
+        </div>
+      </div>
+    </details>
+  </section>
+
+  <!-- ============ PART 2: PREDICT + PRODUCTIONIZE ============ -->
+  <section class="section" id="predict">
+    <div class="section-kicker">
+      <span class="klabel">Part 2 · predict + productionize</span>
+      <h2>Forecast the future, score it live, and keep it alive <span class="tag concept">20 min live</span></h2>
+    </div>
+    <p class="lede">Now the tier earns its name. <strong>Sales forecasting</strong> turns history into a number about the future Kasa can buy against. <strong>Machine learning</strong> puts a model to work at scale - and its marquee use at Kasa is <strong>fraud detection</strong> on Kasa Pay, scoring every wallet and BNPL transaction faster than any hand-written rule list. The last card, <strong>data product</strong>, is the meta-lesson of the whole session: none of this is worth anything as a notebook. A model becomes a product only when it is deployed, owned, monitored, and retrained.</p>
+
+    <details class="card">
+      <summary><span class="mode live">Live</span>Sales forecasting<span class="mini">4 min</span><span class="caret">▶</span></summary>
+      <div class="body">
+        <table class="clean">
+          <tbody>
+            <tr><td><b>What it is</b></td><td>Predicting future demand or revenue from history plus drivers (seasonality, price, promotions, holidays) - a number about the future, with a stated uncertainty.</td></tr>
+            <tr><td><b>Kasa example</b></td><td>A per store-SKU weekly demand forecast that feeds inventory buys across 180 stores - so the right stock lands in the right store before the week starts.</td></tr>
+            <tr><td><b>Business value</b></td><td>Less stockout (lost sales) and less dead stock (tied-up cash and markdowns) at the same time - the two costs a retailer pays for guessing.</td></tr>
+            <tr><td><b>Reach for it when</b></td><td>You buy or plan against an unknown future and today rely on gut feel or last year's numbers.</td></tr>
+            <tr><td><b>Tier</b></td><td><span class="pill solid">🟠 Data Science</span></td></tr>
+          </tbody>
+        </table>
+        <div class="callout example">
+          <span class="ex-pill">Real world</span>
+          <p>Kasa's Jakarta stores kept selling out of a hero SKU by Thursday while the same item gathered dust in Manila. The forecast, cut per store-SKU rather than nationally, exposed the mismatch: demand was regional and Kasa was buying as if it were uniform. Rebalancing buys against the forecast cut stockouts on top sellers and shrank end-of-season markdowns - the same inventory budget, aimed better. A forecast with an honest confidence band also tells the buyer <em>how much</em> safety stock to hold, not just a point guess.</p>
+        </div>
+      </div>
+    </details>
+
+    <details class="card">
+      <summary><span class="mode live">Live</span>Machine learning - fraud detection flagship<span class="mini">★ 8 min</span><span class="caret">▶</span></summary>
+      <div class="body">
+        <table class="clean">
+          <tbody>
+            <tr><td><b>What it is</b></td><td>Models that learn patterns from data to score, classify, or rank at scale - decisions made by a system, on millions of cases, faster and more consistently than people or fixed rules.</td></tr>
+            <tr><td><b>Kasa example</b></td><td>Fraud detection on Kasa Pay: a classifier scores each wallet and BNPL transaction for account-takeover, default risk, and promo-abuse - allow, hold, or deny in milliseconds. (The same toolkit also powers churn, propensity, and recommendations.)</td></tr>
+            <tr><td><b>Business value</b></td><td>Block fraud without blocking good customers - a rule list either misses new attacks or freezes legitimate buyers; a model tuned on the cost of each error does both jobs better.</td></tr>
+            <tr><td><b>Reach for it when</b></td><td>The hand-written rule list can no longer keep up with adversaries who change tactics faster than you can write rules.</td></tr>
+            <tr><td><b>Tier</b></td><td><span class="pill solid">🟠 Data Science</span></td></tr>
+          </tbody>
+        </table>
+
+        <figure class="zoomable">
+          <svg viewBox="0 0 880 380" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Fraud-detection flow: a Kasa Pay transaction becomes features, is scored by a model, and routed to allow, hold, or deny; confirmed fraud loops back to retrain the model">
+            <style>
+              .frT { font: 700 13px Inter, sans-serif; fill: #FFFFFF; }
+              .frH { font: 700 13px Inter, sans-serif; fill: #1E1B3A; }
+              .frN { font: 600 11px Inter, sans-serif; fill: #6B6785; }
+              .frA { stroke: #4F46E5; stroke-width: 2.5; fill: none; marker-end: url(#frAh); }
+              .frLoop { stroke: #84CC16; stroke-width: 2.5; fill: none; marker-end: url(#frLh); stroke-dasharray: 6 4; }
+            </style>
+            <defs>
+              <marker id="frAh" markerWidth="9" markerHeight="9" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6" fill="none" stroke="#4F46E5" stroke-width="1.6"/></marker>
+              <marker id="frLh" markerWidth="9" markerHeight="9" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6" fill="none" stroke="#84CC16" stroke-width="1.6"/></marker>
+            </defs>
+            <!-- main pipeline row -->
+            <rect x="24" y="70" width="150" height="52" rx="10" fill="#3730A3"/><text class="frT" x="40" y="92">Transaction</text><text class="frT" x="40" y="110" style="font-weight:600">wallet / BNPL</text>
+            <rect x="214" y="70" width="150" height="52" rx="10" fill="#4F46E5"/><text class="frT" x="230" y="92">Features</text><text class="frT" x="230" y="110" style="font-weight:600">device, velocity, history</text>
+            <rect x="404" y="70" width="150" height="52" rx="10" fill="#6366F1"/><text class="frT" x="420" y="92">Model</text><text class="frT" x="420" y="110" style="font-weight:600">risk score 0-1</text>
+            <path class="frA" d="M176,96 L212,96"/>
+            <path class="frA" d="M366,96 L402,96"/>
+            <!-- decision fan-out -->
+            <rect x="600" y="24" width="200" height="44" rx="10" fill="#84CC16"/><text class="frH" x="616" y="51" style="fill:#1A2E05">Allow - low score</text>
+            <rect x="600" y="74" width="200" height="44" rx="10" fill="#A5B4FC"/><text class="frH" x="616" y="101">Hold - review / step-up auth</text>
+            <rect x="600" y="124" width="200" height="44" rx="10" fill="#3730A3"/><text class="frT" x="616" y="151">Deny - high score</text>
+            <path class="frA" d="M556,90 L598,50"/>
+            <path class="frA" d="M556,96 L598,96"/>
+            <path class="frA" d="M556,102 L598,142"/>
+            <text class="frN" x="404" y="150">decision routes by the cost of each error, not one fixed cutoff</text>
+            <!-- feedback loop -->
+            <rect x="404" y="250" width="200" height="52" rx="10" fill="#EEF2FF"/><text class="frH" x="420" y="272">Confirmed fraud</text><text class="frN" x="420" y="290" style="fill:#1E1B3A">chargebacks, analyst labels</text>
+            <rect x="150" y="250" width="180" height="52" rx="10" fill="#1E1B3A"/><text class="frT" x="166" y="272">Retrain</text><text class="frT" x="166" y="290" style="font-weight:600">new labels → new model</text>
+            <path class="frLoop" d="M700,170 L700,276 L606,276"/>
+            <path class="frLoop" d="M402,276 L332,276"/>
+            <path class="frLoop" d="M240,248 L240,180 C240,150 300,124 402,110"/>
+            <!-- note -->
+            <rect x="24" y="336" width="14" height="14" rx="3" fill="#84CC16"/>
+            <text class="frN" x="46" y="347" style="fill:#1E1B3A">The loop is the product. Adversaries keep changing tactics, so confirmed fraud feeds back to retrain - a model that stops learning goes stale.</text>
+          </svg>
+          <figcaption>🔍 Click to zoom - the fraud-detection flow: transaction to features to model to decision, with a retraining feedback loop</figcaption>
+        </figure>
+
+        <div class="callout example">
+          <span class="ex-pill">Real world</span>
+          <p>Kasa Pay's fraud started as three problems at once: <strong>account-takeover</strong> (stolen logins draining wallets), <strong>BNPL default</strong> (buy-now-never-pay), and <strong>promo-abuse</strong> (rings farming sign-up credit with fake accounts). The old defense was a rule list the risk team edited by hand - and every time they patched one hole, the attackers found another. A single scored model reads device fingerprint, spend velocity, and account history together, catching combinations no single rule would. The decisive move was the <em>loop</em>: confirmed chargebacks and analyst labels flow back weekly to retrain, so Kasa Pay adapts as fast as its adversaries. Blocking fraud without freezing good customers is the whole game - and it is only winnable with a model that keeps learning.</p>
+        </div>
+        <div class="callout tip">
+          <strong>The error you tune matters more than the model you pick</strong>
+          A fraud model has two ways to be wrong: wave through a fraudster (false negative) or freeze a real customer (false positive). Those cost different amounts, so the "allow / hold / deny" thresholds are a business decision, not a technical default. Leaders should ask for the confusion matrix in money, not the accuracy score.
+        </div>
+      </div>
+    </details>
+
+    <details class="card">
+      <summary><span class="mode live">Live</span>Data product - the meta-lesson<span class="mini">4 min</span><span class="caret">▶</span></summary>
+      <div class="body">
+        <table class="clean">
+          <tbody>
+            <tr><td><b>What it is</b></td><td>The discipline that a model becomes a <em>product</em> only when it is deployed, owned, monitored, and retrained - not when it scores well in a notebook once.</td></tr>
+            <tr><td><b>Kasa example</b></td><td>The fraud score served live behind Kasa Pay checkout - with an owner (the risk team), monitoring on score drift and decision rates, and a scheduled retrain on fresh labels.</td></tr>
+            <tr><td><b>Business value</b></td><td>Durable value that compounds over years, versus a one-off model that impressed in a demo and then quietly rotted or never shipped at all.</td></tr>
+            <tr><td><b>Reach for it when</b></td><td>A model needs to run in production, reliably, for years - the moment it stops being a study and starts being infrastructure.</td></tr>
+            <tr><td><b>Tier</b></td><td><span class="pill solid">🟠 Data Science</span></td></tr>
+          </tbody>
+        </table>
+        <div class="callout tip">
+          <strong>The four words, again</strong>
+          Session 1 said a data product is built, owned, and maintained. This card is that lesson for models specifically. <strong>Deployed</strong> - it runs where the decision happens, not in a notebook. <strong>Owned</strong> - a named team is paged when it misbehaves. <strong>Monitored</strong> - someone watches for drift, not just launch-day accuracy. <strong>Retrained</strong> - it learns from new data on a schedule. A brilliant model missing any one of these is worth zero. This is where data science meets the engineering rigor of the lower tiers, and it is the bridge into the gen-AI tier next session, where agents act on data live and the same discipline gets even sharper teeth.
+        </div>
+      </div>
+    </details>
+  </section>
+
+  <!-- ============ HOMEWORK ============ -->
+  <section class="section" id="exercise">
+    <div class="section-kicker">
+      <span class="klabel">Before Session 5</span>
+      <h2>This week <span class="tag exercise">◐ 20 min total</span></h2>
+    </div>
+    <ul>
+      <li><strong>Find one "treat everyone the same" moment.</strong> Where does your org send one message, one offer, or one journey to a very mixed audience? That is a segmentation opportunity - sketch the 3-4 groups you would split it into and the different action each deserves.</li>
+      <li><strong>Name a forecast you make by gut.</strong> What do you buy, staff, or plan against an unknown future today? Estimate what a stockout and a dead-stock error each cost you - that gap is the value of a real forecast.</li>
+      <li><strong>Audit your models for the four words.</strong> Pick a model your org has built. Is it deployed, owned, monitored, and retrained? Any "no" tells you it is a notebook, not a product - and where the value is leaking.</li>
+      <li><strong>Optional:</strong> for a decision your org automates (fraud, credit, eligibility), write the cost of a false positive vs a false negative in money. Notice they are rarely equal - that asymmetry is the real setting on the model.</li>
+    </ul>
+  </section>
+
+  <!-- ============ QUIZ ============ -->
+  <section class="section" id="quiz">
+    <div class="section-kicker">
+      <span class="klabel">Check yourself</span>
+      <h2>Three questions before you go 🎯 <span class="tag exercise">◐ 90 seconds</span></h2>
+    </div>
+    <div class="quiz-q" data-answer="2">
+      <p class="qtext">1 · Why is fraud detection built as a learning model with a feedback loop rather than a rule list?</p>
+      <button class="qopt" type="button">A · models are cheaper than rules to write</button>
+      <button class="qopt" type="button">B · rules are more accurate but slower</button>
+      <button class="qopt" type="button">C · adversaries change tactics, so confirmed fraud must retrain the model to keep up</button>
+      <p class="qwhy">A hand-written rule list is patched one hole at a time and always trails the attackers. A scored model reads many signals together, and the retraining loop - confirmed fraud feeding back - lets it adapt as fast as the fraud does. The loop is the product.</p>
+    </div>
+    <div class="quiz-q" data-answer="1">
+      <p class="qtext">2 · What turns a model into a data product?</p>
+      <button class="qopt" type="button">A · a higher accuracy score in the notebook</button>
+      <button class="qopt" type="button">B · it is deployed, owned, monitored, and retrained in production</button>
+      <button class="qopt" type="button">C · it uses a deep-learning architecture</button>
+      <p class="qwhy">A brilliant model that lives in a notebook is worth zero. It earns the word "product" only when it runs where the decision happens, has an owner who gets paged, is watched for drift, and learns from new data on a schedule.</p>
+    </div>
+    <div class="quiz-q" data-answer="0">
+      <p class="qtext">3 · Why does Phoebe place data literacy training in the data science tier even though it is cross-cutting?</p>
+      <button class="qopt" type="button">A · it is the human on-ramp to the predictive tier, where uncertainty and error costs start to matter</button>
+      <button class="qopt" type="button">B · literacy is only ever a data science skill</button>
+      <button class="qopt" type="button">C · it has nothing to do with the other tiers</button>
+      <p class="qwhy">Literacy underwrites every tier, but this is the rung where the stakes of misreading data climb sharply - acting on a forecast or a fraud score demands reasoning about confidence, base rates, and the cost of being wrong. It is the human on-ramp to prediction.</p>
+    </div>
+    <p class="quiz-score"></p>
+  </section>
+
+  <!-- ============ OFFICIAL SOURCES ============ -->
+  <section class="section" id="official">
+    <div class="section-kicker">
+      <span class="klabel">Source material</span>
+      <h2>What this session covers</h2>
+    </div>
+    <p class="lede">This is a capability catalog, not a build-it-yourself course. Session 4 teaches the five data science products at the "what / example / value / when" level so a leader can commission them and a follower can understand them. The deep how-to - the statistics, the models, the Python - lives in Phoebe's other courses, cross-linked below.</p>
+    <div class="covered">
+      <div class="covered-row"><span class="status pill solid">✓</span><span class="name">Data literacy, segmentation, forecasting, machine learning, data product</span><span class="note">the five products, each as a read-a-card</span></div>
+      <div class="covered-row"><span class="status pill solid">✓</span><span class="name">Fraud detection flagship (Kasa Pay ATO / BNPL default / promo-abuse)</span><span class="note">the marquee ML example + feedback-loop diagram</span></div>
+      <div class="covered-row"><span class="status pill solid">✓</span><span class="name">The model-to-product discipline (deployed / owned / monitored / retrained)</span><span class="note">the meta-lesson that bridges into gen AI</span></div>
+      <div class="covered-row"><span class="status pill light">◐</span><span class="name">The statistics under forecasts and confidence intervals</span><span class="note">go deeper - learn-statistics</span></div>
+      <div class="covered-row"><span class="status pill light">◐</span><span class="name">Testing whether a model actually moved the metric</span><span class="note">go deeper - learn-experimentation</span></div>
+      <div class="covered-row"><span class="status pill light">◐</span><span class="name">Building segments and models in code, end to end</span><span class="note">go deeper - learn-python-data-analysis</span></div>
+      <div class="covered-row"><span class="status pill light">◐</span><span class="name">Lifting the whole org's ability to read data</span><span class="note">go deeper - learn-data-literacy</span></div>
+    </div>
+  </section>
+
+  <!-- ============ CHEAT SHEET ============ -->
+  <section class="cheat" id="cheatsheet">
+    <h3>Session 4 cheat sheet <span>· pin this</span></h3>
+    <div class="grid-2">
+      <div class="cheat-item"><b>The tier's job</b><span>Predict + personalize. Cross from "what happened" to "what happens next" and "who to treat differently".</span></div>
+      <div class="cheat-item"><b>Data literacy</b><span>The human on-ramp to prediction. Cross-cutting, but filed here because misreading data now costs more.</span></div>
+      <div class="cheat-item"><b>Segmentation</b><span>Group customers by behavior + value. Right offer, right customer. Reach when you treat everyone the same.</span></div>
+      <div class="cheat-item"><b>Forecasting</b><span>History + drivers → a future number with a confidence band. Less stockout, less dead stock.</span></div>
+      <div class="cheat-item"><b>ML + fraud</b><span>Score millions of cases live. Tune the threshold on the cost of each error, and retrain on confirmed fraud.</span></div>
+      <div class="cheat-item"><b>Data product</b><span>A model is a product only when deployed, owned, monitored, retrained. In a notebook it is worth zero.</span></div>
+    </div>
+  </section>
+
+  <footer class="pagefoot">
+    <span>Session 4 of 6 · learn-data-product-with-phoebe · by Phoebe Fu &nbsp;·&nbsp; 📚 <a href="https://phoebefu6.github.io/learn-with-phoebe/">Learn with Phoebe ↗</a></span>
+    <span><a href="../index.html">← All sessions</a> &nbsp;·&nbsp; <a href="05-gen-ai.html">Next: Gen AI →</a></span>
+  </footer>
+
+</main>
+
+<script src="../assets/app.js?v=1"></script>
+</body>
+</html>

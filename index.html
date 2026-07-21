@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>learn data product with phoebe - 29 data products, one maturity ladder</title>
+<link rel="stylesheet" href="assets/style.css?v=1">
+<style>
+  .stats-row { display: flex; gap: 2.4rem; margin-top: 1.5rem; flex-wrap: wrap; }
+  .stat b { display: block; font-size: 2.1rem; font-weight: 800; line-height: 1.05; font-variant-numeric: tabular-nums; }
+  .stat span { font-size: .72rem; opacity: .85; text-transform: uppercase; letter-spacing: .09em; font-weight: 600; }
+
+  /* the climbing-ladder gradient bar in the hero */
+  .ladder-bar { display: flex; margin-top: 1.6rem; border-radius: 999px; overflow: hidden; height: .8rem; max-width: 40rem; box-shadow: 0 2px 10px rgba(27,27,47,.18); }
+  .ladder-bar i { flex: 1; }
+  .ladder-key { display: flex; gap: 1.1rem; margin-top: .7rem; font-size: .74rem; font-weight: 600; opacity: .92; flex-wrap: wrap; }
+  .ladder-key span i { display: inline-block; width: .8rem; height: .8rem; border-radius: 3px; margin-right: .35rem; vertical-align: middle; }
+
+  .course-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(17rem, 1fr)); gap: 1rem; margin-top: 1.5rem; }
+  .course-card {
+    border: 1px solid var(--hairline);
+    border-top: 4px solid var(--diff, var(--indigo));
+    border-radius: var(--radius);
+    padding: 1.2rem 1.3rem 1.1rem;
+    display: flex; flex-direction: column; gap: .5rem;
+    text-decoration: none; color: var(--ink); background: #fff;
+    transition: box-shadow .15s ease, border-color .15s ease, transform .15s ease;
+    position: relative;
+  }
+  .course-card:hover { border-color: var(--indigo-soft); box-shadow: 0 8px 28px rgba(79,70,229,.14); transform: translateY(-3px); }
+  .course-card .cicon { font-size: 1.7rem; line-height: 1; }
+  .course-card .cnum { font-size: .72rem; font-weight: 700; color: var(--diff, var(--indigo)); text-transform: uppercase; letter-spacing: .1em; }
+  .course-card h3 { font-size: 1.05rem; font-weight: 800; line-height: 1.3; }
+  .course-card p { font-size: .85rem; color: var(--muted); flex: 1; }
+  .course-card .meta { display: flex; gap: .4rem; flex-wrap: wrap; }
+
+  .diff-legend { display: flex; gap: 1rem; margin-top: 1.6rem; font-size: .74rem; color: var(--muted); font-weight: 600; flex-wrap: wrap; }
+  .diff-legend i { display: inline-block; width: .85rem; height: .35rem; border-radius: 999px; margin-right: .35rem; vertical-align: middle; }
+
+  .paths { margin-top: 2.6rem; }
+  .paths h2 { font-size: 1.3rem; font-weight: 800; margin-bottom: .3rem; }
+  .paths .plede { color: var(--muted); font-size: .92rem; margin-bottom: .8rem; }
+  .path { display: flex; gap: .55rem; align-items: center; padding: .75rem 0; border-bottom: .5px solid var(--hairline); flex-wrap: wrap; }
+  .path:last-child { border-bottom: none; }
+  .path b { min-width: 15.5rem; font-size: .9rem; }
+  .path .pstep { background: var(--indigo-50); color: var(--indigo); border-radius: 999px; padding: .16rem .68rem; font-weight: 700; font-size: .8rem; text-decoration: none; transition: all .12s ease; }
+  .path .pstep:hover { background: var(--indigo); color: #fff; }
+  .path .parr { color: var(--faint); font-weight: 700; }
+
+  .mm-section { margin-top: 1.6rem; }
+  .mm-section h2 { font-size: 1.3rem; font-weight: 800; margin-bottom: .2rem; }
+  .mm-section .mm-lede { color: var(--muted); font-size: .92rem; margin-bottom: .4rem; }
+  .mm-wrap { border: 1px solid var(--hairline); border-radius: var(--radius); background: linear-gradient(180deg,#fff, #FAFAFE); padding: .6rem; overflow-x: auto; }
+  .mm-svg { width: 100%; height: auto; display: block; max-width: 60rem; margin: 0 auto; min-width: 34rem; }
+  .mm-link { cursor: pointer; text-decoration: none; }
+  .mm-node rect { transition: opacity .15s ease, filter .15s ease; }
+  .mm-node text { pointer-events: none; }
+  .mm-link:hover .mm-node rect { filter: brightness(1.06); }
+  .mm-edge { transition: opacity .15s ease; }
+
+  .noteband { margin-top: 2.4rem; background: var(--indigo-50); border: 1px solid var(--hairline); border-radius: var(--radius); padding: 1rem 1.2rem; font-size: .9rem; color: var(--ink); }
+  .noteband b { color: var(--indigo); }
+</style>
+</head>
+<body>
+
+<header class="masthead">
+  <div class="wrap">
+    <div class="eyebrow">Learn Data Product with Phoebe</div>
+    <h1>Twenty-nine data products, <span class="accent">one maturity ladder</span>, told through a company growing up.</h1>
+    <p class="sub">A guided tour of what a modern data and AI function actually builds - from cloud infrastructure to agentic AI - shown through Kasa, a made-up Southeast Asian retailer with an embedded payments wallet, as it climbs from emailed spreadsheets to one governed platform. This is a capability catalog, not a build-it-yourself bootcamp: every product gets the same card - what it is, a Kasa example, the business value, and when to reach for it - so a leader can commission it and a builder can place it. Four tiers, six sessions, one running case. Read it top to bottom, or jump to the rung your org is stuck on.</p>
+    <div class="stats-row">
+      <div class="stat"><b data-count="29">29</b><span>data products</span></div>
+      <div class="stat"><b data-count="4">4</b><span>maturity tiers</span></div>
+      <div class="stat"><b data-count="6">6</b><span>sessions · 45 min each</span></div>
+      <div class="stat"><b data-count="1">1</b><span>running case: Kasa</span></div>
+    </div>
+    <div class="ladder-bar">
+      <i style="background:#475569"></i><i style="background:#0D9488"></i><i style="background:#4F46E5"></i><i style="background:#7C3AED"></i>
+    </div>
+    <div class="ladder-key">
+      <span><i style="background:#475569"></i>Infrastructure</span>
+      <span><i style="background:#0D9488"></i>Data Analytics</span>
+      <span><i style="background:#4F46E5"></i>Data Science</span>
+      <span><i style="background:#7C3AED"></i>Gen AI</span>
+    </div>
+  </div>
+</header>
+
+<main class="wrap">
+
+  <section class="section">
+    <div class="paths" style="margin-top:0">
+      <h2>The six sessions 🪜 <span style="font-size:.85rem;font-weight:600;color:var(--muted)">· climb the ladder, tier by tier · 45 min each</span></h2>
+      <p class="plede">Everyone starts at Session 1 - it sets the frame and meets Kasa. Sessions 2 to 5 walk one tier each; Session 6 shows how all 29 products stack into a single governed platform. The card colours are the tiers, not difficulty.</p>
+    </div>
+    <div class="course-grid">
+      <a class="course-card" href="courses/01-maturity-ladder.html" style="--diff:#4F46E5">
+        <span class="cicon">🪜</span>
+        <span class="cnum">Session 1 · start here</span>
+        <h3>The data product maturity ladder</h3>
+        <p>What a data product actually is (built, owned, maintained - not a chart), the four-tier ladder, why you climb instead of skip, and a full look at Kasa in chaos.</p>
+        <span class="meta"><span class="pill amber">▶ Start here</span><span class="pill light">🟢 Foundational</span></span>
+      </a>
+      <a class="course-card" href="courses/02-infrastructure.html" style="--diff:#475569">
+        <span class="cicon">🧱</span>
+        <span class="cnum">Session 2 · Infrastructure</span>
+        <h3>The plumbing everything stands on</h3>
+        <p>Cloud infra, app performance monitoring, schema design, data dictionary, data dump, data lake, data warehouse - the seven products that store and serve.</p>
+        <span class="meta"><span class="pill light">🟢 7 products</span><span class="pill light">store + serve</span></span>
+      </a>
+      <a class="course-card" href="courses/03-data-analytics.html" style="--diff:#0D9488">
+        <span class="cicon">📊</span>
+        <span class="cnum">Session 3 · Data Analytics</span>
+        <h3>Answers you can actually trust</h3>
+        <p>Validation, smart reporting, dashboarding, executive scorecard, self-serve BI, metric development, KPI system design, thematic analysis, monitoring, insights sharing, dictionary scorecard.</p>
+        <span class="meta"><span class="pill light">🟡 11 products</span><span class="pill light">measure + explain</span></span>
+      </a>
+      <a class="course-card" href="courses/04-data-science.html" style="--diff:#4F46E5">
+        <span class="cicon">🔮</span>
+        <span class="cnum">Session 4 · Data Science</span>
+        <h3>From what happened to what happens next</h3>
+        <p>Data literacy, customer segmentation, sales forecasting, machine learning (with fraud detection as the flagship), and what turns a model into a real data product.</p>
+        <span class="meta"><span class="pill light">🟠 5 products</span><span class="pill light">predict + personalize</span></span>
+      </a>
+      <a class="course-card" href="courses/05-gen-ai.html" style="--diff:#7C3AED">
+        <span class="cicon">🤖</span>
+        <span class="cnum">Session 5 · Gen AI</span>
+        <h3>Governing and amplifying the stack</h3>
+        <p>Data governance, data quality scorecard, AI literacy, AI use-case discovery, workflow automation, and agentic AI - with Kasa's support agent as the flagship.</p>
+        <span class="meta"><span class="pill light">🔴 6 products</span><span class="pill light">govern + amplify</span></span>
+      </a>
+      <a class="course-card" href="courses/06-composing-the-platform.html" style="--diff:#3730A3">
+        <span class="cicon">🏛️</span>
+        <span class="cnum">Session 6 · Capstone</span>
+        <h3>Composing the platform</h3>
+        <p>How the 29 products stack into one governed platform, how to sequence building them (crawl / walk / run), the ROI per tier, and which rung your own org is on.</p>
+        <span class="meta"><span class="pill light">🟠 Capstone</span><span class="pill light">the whole system</span></span>
+      </a>
+    </div>
+    <div class="diff-legend">
+      <span><i style="background:#475569"></i>Infrastructure - store + serve</span>
+      <span><i style="background:#0D9488"></i>Data Analytics - measure + explain</span>
+      <span><i style="background:#4F46E5"></i>Data Science - predict + personalize</span>
+      <span><i style="background:#7C3AED"></i>Gen AI - govern + amplify</span>
+    </div>
+
+    <div class="paths">
+      <h2>Choose your path 🗺️</h2>
+      <p class="plede">Everyone starts at Session 1. After that, take the full climb or jump to the tier your org is stuck on.</p>
+      <div class="path"><b>🪜 The full climb (recommended)</b>
+        <a class="pstep" href="courses/01-maturity-ladder.html">1</a><span class="parr">→</span>
+        <a class="pstep" href="courses/02-infrastructure.html">2</a><span class="parr">→</span>
+        <a class="pstep" href="courses/03-data-analytics.html">3</a><span class="parr">→</span>
+        <a class="pstep" href="courses/04-data-science.html">4</a><span class="parr">→</span>
+        <a class="pstep" href="courses/05-gen-ai.html">5</a><span class="parr">→</span>
+        <a class="pstep" href="courses/06-composing-the-platform.html">6</a>
+      </div>
+      <div class="path"><b>👔 Exec crash course (60 min)</b>
+        <a class="pstep" href="courses/01-maturity-ladder.html">1 · the ladder</a><span class="parr">→</span>
+        <a class="pstep" href="courses/03-data-analytics.html">3 · trust the number</a><span class="parr">→</span>
+        <a class="pstep" href="courses/06-composing-the-platform.html">6 · sequence + ROI</a>
+      </div>
+      <div class="path"><b>🧱 "We have no foundation" track</b>
+        <a class="pstep" href="courses/01-maturity-ladder.html">1</a><span class="parr">→</span>
+        <a class="pstep" href="courses/02-infrastructure.html">2 · infrastructure</a><span class="parr">→</span>
+        <a class="pstep" href="courses/03-data-analytics.html">3 · analytics</a>
+      </div>
+      <div class="path"><b>🤖 "We want AI now" reality-check track</b>
+        <a class="pstep" href="courses/01-maturity-ladder.html">1 · why you climb</a><span class="parr">→</span>
+        <a class="pstep" href="courses/05-gen-ai.html">5 · gen AI</a><span class="parr">→</span>
+        <a class="pstep" href="courses/06-composing-the-platform.html">6 · what it rests on</a>
+      </div>
+    </div>
+
+    <div class="noteband">
+      <b>One running case: Kasa.</b> Every session works on Kasa - a fictional Southeast Asian omnichannel retailer with ~4M customers, 180 stores across SG, MY, ID and PH, a shopping app, and Kasa Pay, an embedded loyalty wallet with a small buy-now-pay-later line (~US$1.2B revenue). We meet it in chaos - every team with its own "revenue" number, POS data trapped per store, the wallet bleeding to fraud, leadership demanding "AI" before the warehouse exists - and grow it up one tier at a time into a single governed platform.
+    </div>
+
+    <div class="noteband">
+      <b>Honest about scope.</b> This is a capability catalog for leaders and the curious, not a hands-on build course. Each of the 29 products is taught at the "what it is / example / value / when to reach for it" level - enough to commission it and place it on the ladder, not to build it from scratch. The deep how-to lives in Phoebe's other courses on the hub (DataOps, SQL, Python data analysis, statistics, experimentation, RAG, LangChain, evals, and the governance bucket). Tool names appear as examples only; the course is tool-agnostic by design. Content verified July 2026.
+    </div>
+  </section>
+
+  <section class="section mm-section">
+    <h2>The knowledge map 🧠</h2>
+    <p class="mm-lede">The whole ladder at a glance - hover a session to spotlight its products, click any node to jump in.</p>
+    <div class="mm-wrap"><div id="mindmap"></div></div>
+  </section>
+
+  <footer class="pagefoot">
+    <span>learn-data-product-with-phoebe · by Phoebe Fu &nbsp;·&nbsp; 📚 <a href="https://phoebefu6.github.io/learn-with-phoebe/">Learn with Phoebe ↗</a> · siblings: <a href="https://phoebefu6.github.io/learn-dataops-with-phoebe/">learn-dataops</a> · <a href="https://phoebefu6.github.io/learn-strategic-thinking-with-phoebe/">learn-strategic-thinking</a> · <a href="https://phoebefu6.github.io/learn-data-governance-with-phoebe/">learn-data-governance</a></span>
+  </footer>
+</main>
+
+<script>
+window.MINDMAP_DATA = {
+  title: "Data\nProduct",
+  centerColor: "#3730A3",
+  sessions: [
+    { label: "Maturity\nladder", href: "courses/01-maturity-ladder.html", color: "#4F46E5",
+      concepts: [
+        { label: "What is a data product", href: "courses/01-maturity-ladder.html" },
+        { label: "The 4-tier ladder", href: "courses/01-maturity-ladder.html" },
+        { label: "Meet Kasa", href: "courses/01-maturity-ladder.html" } ] },
+    { label: "Infra-\nstructure", href: "courses/02-infrastructure.html", color: "#475569",
+      concepts: [
+        { label: "Lake vs warehouse", href: "courses/02-infrastructure.html" },
+        { label: "Schema + dictionary", href: "courses/02-infrastructure.html" },
+        { label: "Cloud infra + APM", href: "courses/02-infrastructure.html" } ] },
+    { label: "Data\nAnalytics", href: "courses/03-data-analytics.html", color: "#0D9488",
+      concepts: [
+        { label: "Validation + metrics", href: "courses/03-data-analytics.html" },
+        { label: "Dashboards + scorecard", href: "courses/03-data-analytics.html" },
+        { label: "Self-serve BI + KPIs", href: "courses/03-data-analytics.html" } ] },
+    { label: "Data\nScience", href: "courses/04-data-science.html", color: "#4F46E5",
+      concepts: [
+        { label: "Segmentation", href: "courses/04-data-science.html" },
+        { label: "Forecasting", href: "courses/04-data-science.html" },
+        { label: "ML + fraud detection", href: "courses/04-data-science.html" } ] },
+    { label: "Gen AI", href: "courses/05-gen-ai.html", color: "#7C3AED",
+      concepts: [
+        { label: "Governance + quality", href: "courses/05-gen-ai.html" },
+        { label: "AI literacy + discovery", href: "courses/05-gen-ai.html" },
+        { label: "Automation + agents", href: "courses/05-gen-ai.html" } ] },
+    { label: "Compose the\nplatform", href: "courses/06-composing-the-platform.html", color: "#3730A3",
+      concepts: [
+        { label: "Reference architecture", href: "courses/06-composing-the-platform.html" },
+        { label: "Crawl / walk / run", href: "courses/06-composing-the-platform.html" },
+        { label: "ROI per tier", href: "courses/06-composing-the-platform.html" } ] }
+  ]
+};
+</script>
+<script src="assets/mindmap.js?v=1"></script>
+<script src="assets/app.js?v=1"></script>
+</body>
+</html>

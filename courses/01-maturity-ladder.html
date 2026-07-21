@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Session 1 · The data product maturity ladder - learn data product with phoebe</title>
+<link rel="stylesheet" href="../assets/style.css?v=1">
+</head>
+<body>
+
+<div class="toolbar">
+  <div class="wrap">
+    <span class="crumb"><a href="../index.html">learn-data-product-with-phoebe</a> / Session 1 of 6</span>
+    <button class="btn" id="toggle-all" type="button">Expand all</button>
+    <button class="btn primary" id="zoom-toggle" type="button">Projector zoom: off</button>
+  </div>
+</div>
+
+<header class="masthead">
+  <div class="wrap">
+    <div class="eyebrow">Learn Data Product with Phoebe · Session 1 of 6</div>
+    <h1>What is a data product, <span class="accent">and why you climb the ladder instead of skipping it</span></h1>
+    <p class="sub">This course is a guided tour of 29 real data products - from cloud infrastructure to agentic AI - shown through one company, Kasa, as it grows up. Before the tour, one frame you will reuse in every session: a data product is something built, owned, and kept alive that delivers repeatable value from data, and those products stack into four maturity tiers. You cannot put an AI agent on a broken warehouse and expect the truth. Session 1 gives you the ladder, meets Kasa in full chaos, and sets the card format you will read 29 times.</p>
+    <div class="chip-row">
+      <span class="chip level">🟢 Start here</span>
+      <span class="chip audience">Leaders + curious builders</span>
+      <span class="chip audience">Catalog · light on code</span>
+      <span class="chip time">45 min</span>
+    </div>
+    <div class="agenda">
+      <span class="a1" style="flex:1">0-3 · Setup</span>
+      <span class="a2" style="flex:4">3-22 · Product + the ladder</span>
+      <span class="a3" style="flex:4">22-40 · Meet Kasa + read a card</span>
+      <span class="a4" style="flex:1">40-45 · Wrap</span>
+    </div>
+  </div>
+</header>
+
+<main class="wrap">
+
+  <!-- ============ INTRO ============ -->
+  <section class="section" id="intro">
+    <div class="section-kicker">
+      <span class="klabel">Part 0</span>
+      <h2>The tour you are about to take</h2>
+    </div>
+    <p class="lede">Most people meet "data products" as a random pile of buzzwords - lake, warehouse, dashboard, ML, agent - with no sense of what depends on what. This course fixes that. We walk a single company, <strong>Kasa</strong>, up a four-tier ladder: it lays <strong>infrastructure</strong> to store and serve data, earns trustworthy <strong>analytics</strong>, adds <strong>data science</strong> to predict and personalize, then <strong>governs and amplifies</strong> with gen AI. Twenty-nine products, each shown the same way - what it is, a Kasa example, the business value, and when to reach for it. By the end you can look at any org, including your own, and say which rung it is on and what to build next.</p>
+    <div class="legend">
+      <span class="pill solid">Live - covered in session</span>
+      <span class="pill light">Self-study - read after</span>
+      <span class="pill amber">★ The running case: Kasa</span>
+      <span class="pill inkpill">29 products · 4 tiers · 6 sessions</span>
+    </div>
+    <div class="callout win">
+      <strong>★ What you walk out with today</strong>
+      A mental model you reuse for the rest of your data career: the four-tier maturity ladder, a one-sentence definition of "data product" that filters hype from substance, and the read-a-card format (what / example / value / when) that makes the next five sessions fast. Plus you meet Kasa - the messy, real-feeling company whose climb makes all 29 products concrete.
+    </div>
+  </section>
+
+  <!-- ============ PART 1: WHAT IS A DATA PRODUCT ============ -->
+  <section class="section" id="what-is">
+    <div class="section-kicker">
+      <span class="klabel">Part 1 · the definition</span>
+      <h2>A data product is not a chart <span class="tag concept">6 min live</span></h2>
+    </div>
+    <p class="lede">A one-off chart answers a question once and dies in a slide. A <strong>data product</strong> is built, <strong>owned</strong>, and <strong>maintained</strong> - it delivers the same value again and again, for many users, without someone rebuilding it by hand. That single word, <em>maintained</em>, is what separates a real product from a clever notebook. It is also why every product in this course has an owner, a refresh, and a way to break.</p>
+
+    <figure class="zoomable">
+      <svg viewBox="0 0 880 300" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="A one-off analysis on the left dies after one use, a data product on the right is built, owned, refreshed and reused">
+        <style>
+          .dpT { font: 700 13px Inter, sans-serif; fill: #FFFFFF; }
+          .dpH { font: 700 13px Inter, sans-serif; fill: #1E1B3A; }
+          .dpC { font: 600 12px Inter, sans-serif; fill: #1E1B3A; }
+          .dpN { font: 600 11px Inter, sans-serif; fill: #6B6785; }
+          .dpA { stroke: #6366F1; stroke-width: 2.5; fill: none; marker-end: url(#dpAh); }
+        </style>
+        <defs>
+          <marker id="dpAh" markerWidth="9" markerHeight="9" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6" fill="none" stroke="#6366F1" stroke-width="1.6"/></marker>
+        </defs>
+        <!-- LEFT: one-off -->
+        <text class="dpH" x="30" y="34">A one-off analysis</text>
+        <rect x="30" y="50" width="150" height="40" rx="10" fill="#C7C4DE"/><text class="dpC" x="52" y="75" style="fill:#1E1B3A">Question</text>
+        <rect x="30" y="110" width="150" height="40" rx="10" fill="#A5B4FC"/><text class="dpT" x="52" y="135">A chart</text>
+        <rect x="30" y="170" width="150" height="40" rx="10" fill="#E7E5F2"/><text class="dpN" x="52" y="195" style="fill:#1E1B3A">Slide, then gone</text>
+        <path class="dpA" d="M105,90 L105,108"/>
+        <path class="dpA" d="M105,150 L105,168"/>
+        <text class="dpN" x="30" y="238">Answers once. No owner, no refresh.</text>
+        <text class="dpN" x="30" y="256" style="fill:#B91C1C">Redone by hand next month.</text>
+        <!-- divider -->
+        <line x1="300" y1="40" x2="300" y2="270" stroke="#E7E5F2" stroke-width="2"/>
+        <!-- RIGHT: data product -->
+        <text class="dpH" x="340" y="34">A data product</text>
+        <rect x="340" y="60" width="140" height="38" rx="10" fill="#3730A3"/><text class="dpT" x="360" y="84">Data source</text>
+        <rect x="520" y="60" width="140" height="38" rx="10" fill="#4F46E5"/><text class="dpT" x="540" y="84">Built pipeline</text>
+        <rect x="700" y="60" width="150" height="38" rx="10" fill="#6366F1"/><text class="dpT" x="720" y="84">Reusable value</text>
+        <path class="dpA" d="M482,79 L518,79"/>
+        <path class="dpA" d="M662,79 L698,79"/>
+        <rect x="340" y="128" width="510" height="34" rx="9" fill="#EEF2FF"/>
+        <text class="dpC" x="360" y="150">Owner · refresh schedule · monitoring · versioned definition</text>
+        <path class="dpA" d="M595,98 L595,126"/>
+        <rect x="340" y="180" width="510" height="34" rx="9" fill="#84CC16"/>
+        <text class="dpH" x="360" y="202" style="fill:#1A2E05">Same value delivered again and again, for many users</text>
+        <!-- note -->
+        <rect x="340" y="240" width="14" height="14" rx="3" fill="#84CC16"/>
+        <text class="dpN" x="362" y="247" style="fill:#1E1B3A">The test: if it breaks at 3am and someone gets paged,</text>
+        <text class="dpN" x="362" y="263" style="fill:#1E1B3A">it is a product. If it just goes stale, it was an analysis.</text>
+      </svg>
+      <figcaption>🔍 Click to zoom - the maintained-and-owned line between an analysis and a product</figcaption>
+    </figure>
+
+    <details class="card" open>
+      <summary><span class="mode live">Live</span>The four words that make it a product<span class="mini">3 min</span><span class="caret">▶</span></summary>
+      <div class="body">
+        <p>Every product in this catalog passes the same four tests. If a thing fails them, it is a nice analysis, not a product - and it will not survive contact with a real org.</p>
+        <ul>
+          <li><strong>Built</strong> - engineered as a repeatable system, not assembled by hand each time.</li>
+          <li><strong>Owned</strong> - a named person or team is responsible when it breaks or drifts.</li>
+          <li><strong>Maintained</strong> - it refreshes, it is monitored, and it can be fixed.</li>
+          <li><strong>Valuable + repeatable</strong> - it serves the same need over and over for real users.</li>
+        </ul>
+        <div class="callout example">
+          <span class="ex-pill">Real world</span>
+          <p>Kasa's finance analyst rebuilt the "regional revenue" spreadsheet every Monday for a year - copy, paste, reconcile, email. That was a heroic one-off, 52 times. Turning it into a <em>smart report</em> (Session 3) - owned, scheduled, validated - gave her Mondays back and removed the copy-paste errors nobody had been catching. Same output, but now a product.</p>
+        </div>
+      </div>
+    </details>
+
+    <details class="card">
+      <summary><span class="mode self">Self-study</span>How to read every card in this course<span class="mini">2 min read</span><span class="caret">▶</span></summary>
+      <div class="body">
+        <p>From Session 2 on, each of the 29 products gets the same card so you can compare them at a glance:</p>
+        <table class="clean">
+          <thead><tr><th>Line</th><th>Answers</th></tr></thead>
+          <tbody>
+            <tr><td><b>What it is</b></td><td>the product in one plain sentence, no jargon</td></tr>
+            <tr><td><b>Kasa example</b></td><td>what it looks like inside the running case</td></tr>
+            <tr><td><b>Business value</b></td><td>the outcome a leader would pay for</td></tr>
+            <tr><td><b>Reach for it when</b></td><td>the trigger that tells you it is time to build this</td></tr>
+            <tr><td><b>Tier chip</b></td><td>which rung of the ladder it sits on</td></tr>
+          </tbody>
+        </table>
+        <div class="callout tip">
+          <strong>Use it as a commissioning checklist</strong>
+          Leaders: the "reach for it when" line is your buy signal. If the trigger matches your org, that product is worth a conversation. If it does not, you are early - build the rung below it first.
+        </div>
+      </div>
+    </details>
+  </section>
+
+  <!-- ============ PART 2: THE LADDER ============ -->
+  <section class="section" id="ladder">
+    <div class="section-kicker">
+      <span class="klabel">Part 2 · the frame</span>
+      <h2>Four tiers, and why you climb in order <span class="tag concept">7 min live</span></h2>
+    </div>
+    <p class="lede">The 29 products are not a flat menu - they stack. <strong>Infrastructure</strong> stores and serves data. <strong>Analytics</strong> turns it into trustworthy answers. <strong>Data science</strong> predicts and personalizes. <strong>Gen AI</strong> governs and amplifies. Each tier stands on the one below. Skip a rung and the whole thing wobbles: a dashboard on unvalidated data is a confident lie, and an AI agent on a broken warehouse hallucinates with authority. This is the same lesson as Monica Rogati's AI Hierarchy of Needs - infrastructure before intelligence.</p>
+
+    <figure class="zoomable">
+      <svg viewBox="0 0 880 340" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="A four-rung ascending ladder: infrastructure at the base in slate, analytics in teal, data science in indigo, gen AI at the top in violet, with a governance spine running through all">
+        <style>
+          .ldT { font: 800 15px Inter, sans-serif; fill: #FFFFFF; }
+          .ldS { font: 600 12px Inter, sans-serif; fill: #FFFFFF; }
+          .ldN { font: 600 11px Inter, sans-serif; fill: #6B6785; }
+          .ldG { font: 700 11px Inter, sans-serif; fill: #1A2E05; }
+        </style>
+        <!-- rungs, rising left to right -->
+        <rect x="30"  y="250" width="620" height="60" rx="10" fill="#475569"/>
+        <text class="ldT" x="50" y="278">Infrastructure</text><text class="ldS" x="50" y="298">store + serve · cloud, lake, warehouse, schema</text>
+        <rect x="90"  y="188" width="620" height="60" rx="10" fill="#0D9488"/>
+        <text class="ldT" x="110" y="216">Data Analytics</text><text class="ldS" x="110" y="236">measure + explain · validate, dashboard, KPI, scorecard</text>
+        <rect x="150" y="126" width="620" height="60" rx="10" fill="#4F46E5"/>
+        <text class="ldT" x="170" y="154">Data Science</text><text class="ldS" x="170" y="174">predict + personalize · segment, forecast, ML, fraud</text>
+        <rect x="210" y="64"  width="620" height="60" rx="10" fill="#7C3AED"/>
+        <text class="ldT" x="230" y="92">Gen AI</text><text class="ldS" x="230" y="112">govern + amplify · quality, automation, agentic AI</text>
+        <!-- governance spine -->
+        <rect x="836" y="64" width="24" height="246" rx="8" fill="#84CC16"/>
+        <text class="ldG" x="848" y="188" transform="rotate(90 848 188)">governance spine</text>
+        <!-- note squares -->
+        <rect x="30" y="322" width="14" height="14" rx="3" fill="#4F46E5"/>
+        <text class="ldN" x="52" y="333" style="fill:#1E1B3A">You climb bottom-up. Each tier is only as trustworthy as the one beneath it - and governance runs through all four, not on top.</text>
+      </svg>
+      <figcaption>🔍 Click to zoom - the maturity ladder, base to summit, with governance as a spine</figcaption>
+    </figure>
+
+    <details class="card" open>
+      <summary><span class="mode live">Live</span>What each tier is for<span class="mini">3 min</span><span class="caret">▶</span></summary>
+      <div class="body">
+        <table class="clean">
+          <thead><tr><th>Tier</th><th>Job</th><th>The question it answers</th></tr></thead>
+          <tbody>
+            <tr><td><b>Infrastructure</b></td><td>store + serve</td><td>"Where does our data live and how do we get to it?"</td></tr>
+            <tr><td><b>Data Analytics</b></td><td>measure + explain</td><td>"What happened, and can we trust the number?"</td></tr>
+            <tr><td><b>Data Science</b></td><td>predict + personalize</td><td>"What will happen, and who should we treat differently?"</td></tr>
+            <tr><td><b>Gen AI</b></td><td>govern + amplify</td><td>"How do we do this safely, at scale, with less manual work?"</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </details>
+
+    <details class="card">
+      <summary><span class="mode self">Self-study</span>Why skipping a rung backfires<span class="mini">2 min read</span><span class="caret">▶</span></summary>
+      <div class="body">
+        <p>The most expensive data mistakes are all rung-skips. A few patterns you will recognize:</p>
+        <ul>
+          <li><strong>AI on a swamp</strong> - buying an "AI copilot" before the warehouse is clean. It answers fluently and wrongly, and trust never recovers.</li>
+          <li><strong>Dashboards on sand</strong> - shipping 40 dashboards with no data validation. Every meeting becomes an argument about whose number is right.</li>
+          <li><strong>Models with no home</strong> - a data scientist builds a great churn model that lives in a notebook and never ships. Value: zero.</li>
+        </ul>
+        <div class="callout tip">
+          <strong>The ladder is a sequencing tool, not a ranking</strong>
+          Higher is not "better" - infrastructure is not lesser than AI. Higher just <em>depends on</em> lower. A mature org runs all four tiers at once; a growing one builds them in order.
+        </div>
+      </div>
+    </details>
+  </section>
+
+  <!-- ============ PART 3: SAME QUESTION FOUR MATURITIES ============ -->
+  <section class="section" id="four-maturities">
+    <div class="section-kicker">
+      <span class="klabel">Part 3 · the intuition</span>
+      <h2>One question, answered at four maturities <span class="tag concept">5 min live</span></h2>
+    </div>
+    <p class="lede">To feel the ladder, take one business question - "how are our stores doing?" - and watch the answer grow up as Kasa climbs. Same question, four very different products behind the answer.</p>
+
+    <figure class="zoomable">
+      <svg viewBox="0 0 880 260" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="The question how are our stores doing answered four ways, one per tier, each richer than the last">
+        <style>
+          .sqT { font: 700 12px Inter, sans-serif; fill: #FFFFFF; }
+          .sqL { font: 700 12px Inter, sans-serif; fill: #1E1B3A; }
+          .sqN { font: 600 11px Inter, sans-serif; fill: #6B6785; }
+        </style>
+        <rect x="30" y="24" width="820" height="34" rx="9" fill="#EEF2FF"/>
+        <text class="sqL" x="50" y="46">Q: "How are our stores doing?"</text>
+        <!-- four columns -->
+        <rect x="30" y="80" width="190" height="48" rx="10" fill="#475569"/><text class="sqT" x="46" y="100">Infrastructure</text><text class="sqT" x="46" y="118" style="font-weight:600">the data exists + is reachable</text>
+        <rect x="240" y="80" width="190" height="48" rx="10" fill="#0D9488"/><text class="sqT" x="256" y="100">Analytics</text><text class="sqT" x="256" y="118" style="font-weight:600">a trusted live dashboard</text>
+        <rect x="450" y="80" width="190" height="48" rx="10" fill="#4F46E5"/><text class="sqT" x="466" y="100">Data science</text><text class="sqT" x="466" y="118" style="font-weight:600">forecast + which stores to act on</text>
+        <rect x="660" y="80" width="190" height="48" rx="10" fill="#7C3AED"/><text class="sqT" x="676" y="100">Gen AI</text><text class="sqT" x="676" y="118" style="font-weight:600">ask in plain English, get a brief</text>
+        <!-- answers -->
+        <text class="sqN" x="30" y="160">"POS data lands</text><text class="sqN" x="30" y="176">nightly in the lake."</text>
+        <text class="sqN" x="240" y="160">"MY revenue down</text><text class="sqN" x="240" y="176">4% week on week."</text>
+        <text class="sqN" x="450" y="160">"MY will miss target;</text><text class="sqN" x="450" y="176">these 12 stores drive it."</text>
+        <text class="sqN" x="660" y="160">"Draft the board note</text><text class="sqN" x="660" y="176">and email the 12 managers."</text>
+        <!-- arrow -->
+        <line x1="30" y1="208" x2="850" y2="208" stroke="#C7C4DE" stroke-width="2" marker-end="url(#sqAh)"/>
+        <defs><marker id="sqAh" markerWidth="10" markerHeight="10" refX="7" refY="3" orient="auto"><path d="M0,0 L7,3 L0,6" fill="none" stroke="#C7C4DE" stroke-width="1.6"/></marker></defs>
+        <text class="sqN" x="30" y="230" style="fill:#1E1B3A">more mature = from "the number exists" to "the number acts". Every step still relies on the one before it.</text>
+      </svg>
+      <figcaption>🔍 Click to zoom - the same question maturing from raw data to an agent that acts</figcaption>
+    </figure>
+
+    <div class="callout example">
+      <span class="ex-pill">Real world</span>
+      <p>Notice the gen-AI answer only works because everything under it is solid: the agent can "draft the board note and email the managers" only because the warehouse is trustworthy, the forecast is real, and governance says what it is allowed to send. Pull out any lower rung and the top answer becomes a confident fabrication. That dependency is the whole point of the course.</p>
+    </div>
+  </section>
+
+  <!-- ============ MEET KASA ============ -->
+  <section class="section" id="meet-kasa">
+    <div class="section-kicker">
+      <span class="klabel">The running case</span>
+      <h2>Meet Kasa, in full chaos <span class="tag demo">★ 8 min · everyone</span></h2>
+    </div>
+    <p class="lede">Every session works on <strong>Kasa</strong> - a made-up but realistic Southeast Asian retailer we will grow up together. Meeting it messy makes the climb feel real.</p>
+    <div class="steps">
+      <div class="step"><p><strong>The company.</strong> Kasa: ~4M customers, 180 stores across Singapore, Malaysia, Indonesia and the Philippines, a shopping app, and <strong>Kasa Pay</strong> - an embedded loyalty wallet with a small buy-now-pay-later line. Revenue ~US$1.2B, blended online and offline.</p></div>
+      <div class="step"><p><strong>The chaos (where we start).</strong> Every team emails its own spreadsheet. Finance, marketing and store ops each have a different "revenue" number. The POS data is trapped per-store. Kasa Pay is bleeding to fraud that a hand-written rule list cannot keep up with. Support tickets pile up. Leadership wants "AI" but the warehouse does not exist yet.</p></div>
+      <div class="step"><p><strong>The cast.</strong> <b>Mei</b> (new CDAO, our sponsor), <b>Raj</b> (data engineering), <b>Sofia</b> (BI + analytics), <b>Deng</b> (data science), the <b>CFO</b> (wants one trusted number), and the <b>Kasa Pay risk team</b> (wants the fraud bleeding to stop).</p></div>
+      <div class="step"><p><strong>The journey.</strong> Sessions 2-5 build Kasa up one tier at a time; Session 6 shows how the 29 products stack into a single governed platform. Keep Kasa's chaos in mind - each product we meet is fixing a specific piece of it.</p></div>
+    </div>
+    <div class="callout tip">
+      <strong>Kasa is fictional on purpose</strong>
+      A synthetic company lets us be concrete without exposing any client. The numbers are illustrative, the problems are real, and the sequencing is exactly what Phoebe would recommend to a company at Kasa's stage.
+    </div>
+  </section>
+
+  <!-- ============ HOMEWORK ============ -->
+  <section class="section" id="exercise">
+    <div class="section-kicker">
+      <span class="klabel">Before Session 2</span>
+      <h2>This week <span class="tag exercise">◐ 20 min total</span></h2>
+    </div>
+    <ul>
+      <li><strong>Locate your own org on the ladder.</strong> Which tier is the highest one you run <em>reliably</em> (not just "have tried")? Be honest - most orgs overestimate by a rung.</li>
+      <li><strong>Find one heroic one-off.</strong> Name a report or analysis someone rebuilds by hand on a schedule. That is a data product waiting to be built - note which of the 29 it would become.</li>
+      <li><strong>Spot a rung-skip.</strong> Recall a time an org (yours or in the news) bought the top of the ladder before the base - an AI tool on messy data. What went wrong?</li>
+      <li><strong>Optional:</strong> write your org's "how are we doing?" answer at each of the four maturities, like the Kasa diagram. The gaps show you what to build.</li>
+    </ul>
+  </section>
+
+  <!-- ============ QUIZ ============ -->
+  <section class="section" id="quiz">
+    <div class="section-kicker">
+      <span class="klabel">Check yourself</span>
+      <h2>Three questions before you go 🎯 <span class="tag exercise">◐ 90 seconds</span></h2>
+    </div>
+    <div class="quiz-q" data-answer="2">
+      <p class="qtext">1 · What separates a data product from a one-off analysis?</p>
+      <button class="qopt" type="button">A · it uses a bigger dataset</button>
+      <button class="qopt" type="button">B · it has a nicer chart</button>
+      <button class="qopt" type="button">C · it is built, owned, and maintained to deliver repeatable value</button>
+      <p class="qwhy">The dividing word is "maintained" - a product has an owner, a refresh, and a way to break. A one-off answers once and dies in a slide.</p>
+    </div>
+    <div class="quiz-q" data-answer="0">
+      <p class="qtext">2 · Why do you climb the ladder in order rather than skip to the top?</p>
+      <button class="qopt" type="button">A · each tier depends on the trustworthiness of the one below it</button>
+      <button class="qopt" type="button">B · higher tiers are more important than lower ones</button>
+      <button class="qopt" type="button">C · it is cheaper to build gen AI first</button>
+      <p class="qwhy">Higher is not better, it is dependent. An AI agent on a broken warehouse hallucinates with authority - the base has to be solid first. It echoes the AI Hierarchy of Needs: infrastructure before intelligence.</p>
+    </div>
+    <div class="quiz-q" data-answer="1">
+      <p class="qtext">3 · The gen-AI answer "draft the board note and email the 12 managers" only works because...</p>
+      <button class="qopt" type="button">A · the model is very large</button>
+      <button class="qopt" type="button">B · the trusted warehouse, real forecast, and governance underneath it are all in place</button>
+      <button class="qopt" type="button">C · someone checked it by hand first</button>
+      <p class="qwhy">The top of the ladder only acts correctly when every rung under it is solid. Remove the warehouse or the governance and the agent acts confidently on fiction.</p>
+    </div>
+    <p class="quiz-score"></p>
+  </section>
+
+  <!-- ============ OFFICIAL SOURCES ============ -->
+  <section class="section" id="official">
+    <div class="section-kicker">
+      <span class="klabel">Source material</span>
+      <h2>What this session covers</h2>
+    </div>
+    <p class="lede">This is a capability catalog, not a build-it-yourself course. Session 1 sets the frame; each product is taught at the "what / example / value / when" level so a leader can commission it and a follower can understand it. The deep how-to lives in Phoebe's other courses, cross-linked below.</p>
+    <div class="covered">
+      <div class="covered-row"><span class="status pill solid">✓</span><span class="name">What a data product is (built / owned / maintained)</span><span class="note">Part 1 - the definition + read-a-card format</span></div>
+      <div class="covered-row"><span class="status pill solid">✓</span><span class="name">The four-tier maturity ladder + why you climb it</span><span class="note">Parts 2-3 - the frame for all 6 sessions</span></div>
+      <div class="covered-row"><span class="status pill solid">✓</span><span class="name">The running case: Kasa</span><span class="note">meet-Kasa - the company we grow up</span></div>
+      <div class="covered-row"><span class="status pill light">◐</span><span class="name">AI Hierarchy of Needs (Monica Rogati)</span><span class="note">the "infrastructure before AI" idea - concept-level here</span></div>
+      <div class="covered-row"><span class="status pill light">◐</span><span class="name">Hands-on build for each product</span><span class="note">out of scope by design - see sibling courses on the hub</span></div>
+    </div>
+  </section>
+
+  <!-- ============ CHEAT SHEET ============ -->
+  <section class="cheat" id="cheatsheet">
+    <h3>Session 1 cheat sheet <span>· pin this</span></h3>
+    <div class="grid-2">
+      <div class="cheat-item"><b>Data product</b><span>Built, owned, maintained; delivers repeatable value. Not a one-off chart.</span></div>
+      <div class="cheat-item"><b>The product test</b><span>If it breaks at 3am, does someone get paged? Yes = product. No = analysis.</span></div>
+      <div class="cheat-item"><b>Four tiers</b><span>Infrastructure (store) · Analytics (measure) · Data science (predict) · Gen AI (govern + amplify).</span></div>
+      <div class="cheat-item"><b>Climb, don't skip</b><span>Each tier depends on the one below. AI on a broken base = confident lies.</span></div>
+      <div class="cheat-item"><b>Governance spine</b><span>Runs through all four tiers, not bolted on top.</span></div>
+      <div class="cheat-item"><b>Read-a-card</b><span>What it is · Kasa example · business value · reach for it when · tier chip.</span></div>
+    </div>
+  </section>
+
+  <footer class="pagefoot">
+    <span>Session 1 of 6 · learn-data-product-with-phoebe · by Phoebe Fu &nbsp;·&nbsp; 📚 <a href="https://phoebefu6.github.io/learn-with-phoebe/">Learn with Phoebe ↗</a></span>
+    <span><a href="../index.html">← All sessions</a> &nbsp;·&nbsp; <a href="02-infrastructure.html">Next: Infrastructure →</a></span>
+  </footer>
+
+</main>
+
+<script src="../assets/app.js?v=1"></script>
+</body>
+</html>

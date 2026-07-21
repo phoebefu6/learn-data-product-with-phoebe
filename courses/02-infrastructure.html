@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Session 2 · Infrastructure - learn data product with phoebe</title>
+<link rel="stylesheet" href="../assets/style.css?v=1">
+<style>
+  :root{ --indigo:#475569; --indigo-deep:#334155; --indigo-mid:#64748B; --indigo-soft:#94A3B8; --indigo-50:#F1F5F9; }
+</style>
+</head>
+<body>
+
+<div class="toolbar">
+  <div class="wrap">
+    <span class="crumb"><a href="../index.html">learn-data-product-with-phoebe</a> / Session 2 of 6</span>
+    <button class="btn" id="toggle-all" type="button">Expand all</button>
+    <button class="btn primary" id="zoom-toggle" type="button">Projector zoom: off</button>
+  </div>
+</div>
+
+<header class="masthead">
+  <div class="wrap">
+    <div class="eyebrow">Learn Data Product with Phoebe · Session 2 of 6</div>
+    <h1>Infrastructure <span class="accent">- the plumbing everything else stands on</span></h1>
+    <p class="sub">Infrastructure is the boring-on-purpose tier: nobody demos it in a board meeting, yet every dashboard, model, and AI agent in the next four sessions stands on it. This session walks the seven products that decide where Kasa's data lands and where it lives - the cloud it runs on, the monitoring that watches it, the schema and dictionary that give it shape and meaning, and the dump-to-lake-to-warehouse flow that turns raw exports into a trusted, query-fast source. Get this rung right and everything above it is possible. Get it wrong and you are building on sand.</p>
+    <div class="chip-row">
+      <span class="chip level">🟢 Foundational</span>
+      <span class="chip audience">Leaders + builders</span>
+      <span class="chip audience">Catalog</span>
+      <span class="chip time">45 min</span>
+    </div>
+    <div class="agenda">
+      <span class="a1" style="flex:1">0-3 · Setup</span>
+      <span class="a2" style="flex:4">3-24 · Where data lands</span>
+      <span class="a3" style="flex:4">24-40 · Where data lives</span>
+      <span class="a4" style="flex:1">40-45 · Wrap</span>
+    </div>
+  </div>
+</header>
+
+<main class="wrap">
+
+  <!-- ============ INTRO ============ -->
+  <section class="section" id="intro">
+    <div class="section-kicker">
+      <span class="klabel">Part 0</span>
+      <h2>The tier nobody applauds, and everything needs</h2>
+    </div>
+    <p class="lede">When Kasa's leadership says "we want AI", they are pointing at the top of the ladder. But you cannot serve an answer you cannot store, trust a number you cannot trace, or join two tables that were never designed to meet. Infrastructure is the tier that makes the rest legal. It answers one blunt question - <strong>"where does our data live, and how do we get to it reliably?"</strong> - through seven products that split into two jobs: <strong>where data lands</strong> (the cloud, the monitoring, the schema, the dictionary) and <strong>where data lives</strong> (the raw dump, the flexible lake, the modeled warehouse). None of these are glamorous. All of them are load-bearing. This session is your commissioning checklist for the base of the ladder.</p>
+    <div class="legend">
+      <span class="pill solid">Live - covered in session</span>
+      <span class="pill light">Self-study - read after</span>
+      <span class="pill amber">★ The running case: Kasa</span>
+      <span class="pill inkpill">7 products · slate tier · 45 min</span>
+    </div>
+    <div class="callout win">
+      <strong>★ What you walk out with today</strong>
+      A working map of the seven infrastructure products, and the judgement to tell them apart - especially the one that trips up every org, the difference between a data lake and a data warehouse. You will be able to look at Kasa's chaos (POS trapped per-store, three definitions of "revenue", a silently half-loaded ETL) and name exactly which infrastructure product fixes each piece, and in what order to build them.
+    </div>
+  </section>
+
+  <!-- ============ PART 1: WHERE DATA LANDS ============ -->
+  <section class="section" id="lands">
+    <div class="section-kicker">
+      <span class="klabel">Part 1 · where data lands</span>
+      <h2>The ground, the watchtower, and the blueprint <span class="tag concept">18 min live</span></h2>
+    </div>
+    <p class="lede">Before data can live anywhere useful, it has to land somewhere reliable and arrive with shape and meaning. Four products do this. <strong>Cloud Infra</strong> is the ground you build on. <strong>APM</strong> is the watchtower that tells you when a pipeline breaks. <strong>Schema Design</strong> is the blueprint that decides how tables fit together. <strong>Data Dictionary</strong> is the plain-language catalog that stops the "whose number is right?" fight. Skip any one and the tier above inherits the mess.</p>
+
+    <figure class="zoomable">
+      <svg viewBox="0 0 880 360" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="The infrastructure stack: cloud infra as the ground, schema and dictionary as the blueprint, dump to lake to warehouse as the flow, APM watching over all">
+        <style>
+          .clA-T { font: 800 14px Inter, sans-serif; fill: #FFFFFF; }
+          .clA-S { font: 600 11px Inter, sans-serif; fill: #FFFFFF; }
+          .clA-H { font: 700 12px Inter, sans-serif; fill: #1E1B3A; }
+          .clA-N { font: 600 11px Inter, sans-serif; fill: #6B6785; }
+          .clA-G { font: 700 11px Inter, sans-serif; fill: #1A2E05; }
+          .clA-a { stroke: #64748B; stroke-width: 2.5; fill: none; marker-end: url(#clAh); }
+        </style>
+        <defs>
+          <marker id="clAh" markerWidth="9" markerHeight="9" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6" fill="none" stroke="#64748B" stroke-width="1.6"/></marker>
+        </defs>
+        <!-- APM watchtower -->
+        <rect x="30" y="24" width="820" height="34" rx="9" fill="#94A3B8"/>
+        <text class="clA-T" x="50" y="46">APM · watches every box below - latency, errors, "did the load finish?"</text>
+        <!-- the flow: dump -> lake -> warehouse -->
+        <rect x="60" y="96" width="200" height="56" rx="10" fill="#94A3B8"/><text class="clA-T" x="80" y="122">Data Dump</text><text class="clA-S" x="80" y="140">raw as-is export</text>
+        <rect x="340" y="96" width="200" height="56" rx="10" fill="#64748B"/><text class="clA-T" x="360" y="122">Data Lake</text><text class="clA-S" x="360" y="140">keep everything, any shape</text>
+        <rect x="620" y="96" width="200" height="56" rx="10" fill="#475569"/><text class="clA-T" x="640" y="122">Data Warehouse</text><text class="clA-S" x="640" y="140">modeled + query-fast</text>
+        <path class="clA-a" d="M262,124 L338,124"/>
+        <path class="clA-a" d="M542,124 L618,124"/>
+        <!-- blueprint layer -->
+        <rect x="60" y="188" width="760" height="46" rx="10" fill="#334155"/>
+        <text class="clA-T" x="80" y="209">Schema Design + Data Dictionary</text>
+        <text class="clA-S" x="80" y="226">the blueprint: how tables fit together + what every field means</text>
+        <!-- ground -->
+        <rect x="60" y="262" width="760" height="52" rx="10" fill="#1E1B3A"/>
+        <text class="clA-T" x="80" y="286">Cloud Infra</text>
+        <text class="clA-S" x="80" y="304">the ground - rented compute, storage, network that all of the above runs on</text>
+        <!-- note square -->
+        <rect x="60" y="330" width="14" height="14" rx="3" fill="#84CC16"/>
+        <text class="clA-N" x="82" y="341" style="fill:#1E1B3A">Bottom-up: cloud is the ground, schema + dictionary add meaning, data flows dump to lake to warehouse.</text>
+      </svg>
+      <figcaption>🔍 Click to zoom - the infrastructure stack: ground, blueprint, flow, and the watchtower over all</figcaption>
+    </figure>
+
+    <details class="card" open>
+      <summary><span class="mode live">Live</span>Cloud Infra - the ground you rent instead of run<span class="mini">4 min</span><span class="caret">▶</span></summary>
+      <div class="body">
+        <table class="clean">
+          <tbody>
+            <tr><td><b>What it is</b></td><td>Managed compute, storage, and network you rent from a provider instead of buying and running your own servers.</td></tr>
+            <tr><td><b>Kasa example</b></td><td>Raj lifts the 180 on-prem store databases into the cloud so POS data is no longer trapped on a box in each store's back office.</td></tr>
+            <tr><td><b>Business value</b></td><td>Elastic cost that scales with load, no upfront capex, and far faster to stand up new capacity - build in days, not procurement quarters.</td></tr>
+            <tr><td><b>Reach for it when</b></td><td>You are scaling past a single server, your load is spiky, or your data is trapped in places it cannot be reached.</td></tr>
+          </tbody>
+        </table>
+        <div class="callout example">
+          <span class="ex-pill">Real world</span>
+          <p>Kasa's data was not missing - it was <em>marooned</em>. Each store's sales sat on a local machine, reachable only by someone physically there or a nightly email. Lifting those 180 databases to the cloud did not add a single new number, but for the first time all 180 stores were reachable from one place at the same time. That single move is what makes every product in this course even possible - you cannot serve data you cannot reach.</p>
+        </div>
+      </div>
+    </details>
+
+    <details class="card">
+      <summary><span class="mode live">Live</span>App Performance Monitoring (APM) - the watchtower<span class="mini">4 min</span><span class="caret">▶</span></summary>
+      <div class="body">
+        <table class="clean">
+          <tbody>
+            <tr><td><b>What it is</b></td><td>Tooling that watches the latency, errors, and traces of running apps and data pipelines, and alerts you when something breaks or slows.</td></tr>
+            <tr><td><b>Kasa example</b></td><td>The nightly ETL silently half-loads one region's POS data. APM catches the row-count drop and pages Raj before Monday's numbers go out wrong.</td></tr>
+            <tr><td><b>Business value</b></td><td>You find breakage before the business does - no more "the dashboard was wrong for a week and nobody noticed".</td></tr>
+            <tr><td><b>Reach for it when</b></td><td>Any pipeline or app feeds a decision - the moment silence could mean "broken" rather than "fine".</td></tr>
+          </tbody>
+        </table>
+        <div class="callout example">
+          <span class="ex-pill">Real world</span>
+          <p>The scariest data failures are the quiet ones. Kasa's nightly load once completed "successfully" while dropping half of Malaysia's transactions - the job did not error, it just loaded less. For two weeks the MY revenue number looked merely soft, and three teams argued about consumer sentiment. APM would have flagged the row-count anomaly on night one. The lesson: a pipeline that does not error is not the same as a pipeline that worked.</p>
+        </div>
+      </div>
+    </details>
+
+    <details class="card">
+      <summary><span class="mode live">Live</span>Data Schema Design - the blueprint<span class="mini">4 min</span><span class="caret">▶</span></summary>
+      <div class="body">
+        <table class="clean">
+          <tbody>
+            <tr><td><b>What it is</b></td><td>The deliberate shape of your tables, keys, and data types - decided <em>before</em> data lands, not patched afterward.</td></tr>
+            <tr><td><b>Kasa example</b></td><td>Raj models orders, customers, and payments once, cleanly, so a customer ID means the same thing in the app, the POS, and Kasa Pay.</td></tr>
+            <tr><td><b>Business value</b></td><td>Joins that actually work, no expensive rework, and new data sources that slot in instead of fighting the existing shape.</td></tr>
+            <tr><td><b>Reach for it when</b></td><td>You are standing up any new store, system, or data source - design the shape before the first row arrives.</td></tr>
+          </tbody>
+        </table>
+        <div class="callout example">
+          <span class="ex-pill">Real world</span>
+          <p>Kasa's original systems each grew their own idea of a "customer" - the app used an email, the POS used a phone number, Kasa Pay used a wallet ID. Nothing joined. Every cross-channel question needed a data scientist to hand-stitch identities for a week. Designing one clean schema up front - shared keys, agreed types - is unglamorous work that pays back on every single join for years. Schema is the cheapest thing to get right early and the most expensive to fix late.</p>
+        </div>
+      </div>
+    </details>
+
+    <details class="card">
+      <summary><span class="mode live">Live</span>Data Dictionary - the shared meaning<span class="mini">4 min</span><span class="caret">▶</span></summary>
+      <div class="body">
+        <table class="clean">
+          <tbody>
+            <tr><td><b>What it is</b></td><td>A plain-language catalog of every field: what it means, how it is calculated, and who owns it.</td></tr>
+            <tr><td><b>Kasa example</b></td><td>One agreed definition of "active customer" - is it 30-day, 90-day, purchase or login? - written down, owned, and linked to the actual column.</td></tr>
+            <tr><td><b>Business value</b></td><td>Kills the "whose number is right?" fight. Meetings stop being about definitions and start being about decisions.</td></tr>
+            <tr><td><b>Reach for it when</b></td><td>More than one team reads the same data - the instant a term can mean two different things to two people.</td></tr>
+          </tbody>
+        </table>
+        <div class="callout example">
+          <span class="ex-pill">Real world</span>
+          <p>Kasa's three "revenue" numbers were not a data problem - they were a <em>meaning</em> problem. Finance netted returns, marketing counted gross, store ops used shipped value. All three were "correct" and all three were different. A data dictionary does not compute anything new; it just writes the definition down once, names an owner, and ends the argument. It is the cheapest governance product on the ladder and often the highest trust-per-dollar.</p>
+        </div>
+      </div>
+    </details>
+  </section>
+
+  <!-- ============ PART 2: WHERE DATA LIVES ============ -->
+  <section class="section" id="lives">
+    <div class="section-kicker">
+      <span class="klabel">Part 2 · where data lives</span>
+      <h2>From raw drop to trusted source <span class="tag concept">14 min live</span></h2>
+    </div>
+    <p class="lede">Once data lands on solid ground with shape and meaning, it needs somewhere to live. Three products form a pipeline that gets progressively more refined. The <strong>Data Dump</strong> is the raw catch - lose nothing. The <strong>Data Lake</strong> holds everything of any shape, cheaply, and decides structure later. The <strong>Data Warehouse</strong> is the modeled, clean, query-fast source that analytics actually runs on. The relationship between the last two is the single most-confused idea in data infrastructure, so it gets the flagship diagram.</p>
+
+    <details class="card" open>
+      <summary><span class="mode live">Live</span>Data Dump - lose nothing<span class="mini">3 min</span><span class="caret">▶</span></summary>
+      <div class="body">
+        <table class="clean">
+          <tbody>
+            <tr><td><b>What it is</b></td><td>A raw, as-is export of source data, captured without transforming or interpreting it.</td></tr>
+            <tr><td><b>Kasa example</b></td><td>A nightly raw drop of the full POS system - every field, exactly as the till recorded it, no cleaning.</td></tr>
+            <tr><td><b>Business value</b></td><td>Cheap capture with nothing lost - if you did not model a field today, you can still recover it tomorrow because the raw is kept.</td></tr>
+            <tr><td><b>Reach for it when</b></td><td>You must land data before you fully understand it - capture first, make sense of it later.</td></tr>
+          </tbody>
+        </table>
+        <div class="callout tip">
+          <strong>Why "keep the raw" is a discipline, not laziness</strong>
+          The instinct is to clean data on the way in. But every cleaning step is a decision, and decisions have bugs. Keeping the raw dump means when a downstream number looks wrong, you can always go back to what the source actually said - the ultimate ground truth.
+        </div>
+      </div>
+    </details>
+
+    <details class="card">
+      <summary><span class="mode live">Live</span>Data Lake - keep everything, decide later<span class="mini">4 min</span><span class="caret">▶</span></summary>
+      <div class="body">
+        <table class="clean">
+          <tbody>
+            <tr><td><b>What it is</b></td><td>A cheap store for raw and semi-structured data of any shape - logs, clickstream, images, tables - all in one place.</td></tr>
+            <tr><td><b>Kasa example</b></td><td>App logs, web clickstream, POS exports, and Kasa Pay wallet events all land in one lake, each in its own zone.</td></tr>
+            <tr><td><b>Business value</b></td><td>Keep everything and decide the schema at read time (schema-on-read) - you never throw away data just because you have no use for it yet.</td></tr>
+            <tr><td><b>Reach for it when</b></td><td>The variety and volume of your data outgrows what a warehouse alone can hold cleanly.</td></tr>
+          </tbody>
+        </table>
+        <div class="callout example">
+          <span class="ex-pill">Real world</span>
+          <p>Kasa's data scientists could not build a fraud model in Session 4 without wallet event logs - but nobody had "designed a table" for those logs two years earlier. Because the lake had been quietly catching them raw the whole time, the history was there when it was finally needed. That is the lake's superpower: it lets you keep options open cheaply. The cost is discipline - a lake without governance quietly becomes a swamp nobody trusts.</p>
+        </div>
+      </div>
+    </details>
+
+    <details class="card">
+      <summary><span class="mode live">Live</span>Data Warehouse - the one trusted, fast source<span class="mini">4 min</span><span class="caret">▶</span></summary>
+      <div class="body">
+        <table class="clean">
+          <tbody>
+            <tr><td><b>What it is</b></td><td>A modeled, query-fast store of clean, conformed data built specifically for analytics and reporting.</td></tr>
+            <tr><td><b>Kasa example</b></td><td>The conformed sales and customer marts that Sofia's BI dashboards and the CFO scorecard all run on - one shape, one truth.</td></tr>
+            <tr><td><b>Business value</b></td><td>One trusted, fast source for reporting - fast because it is modeled ahead of time (schema-on-write), trusted because it is conformed.</td></tr>
+            <tr><td><b>Reach for it when</b></td><td>You need reliable, repeatable analytics that many people rely on - the moment reporting has to be dependable.</td></tr>
+          </tbody>
+        </table>
+        <div class="callout example">
+          <span class="ex-pill">Real world</span>
+          <p>The warehouse is where Kasa's "one revenue number" finally becomes real. Raw POS lands in the dump, everything of any shape pools in the lake, and then the warehouse takes the pieces that matter and models them into clean, conformed sales marts - defined once, matching the data dictionary, fast to query. When the CFO asks "how did we do last week?", the warehouse is what answers in seconds with a number every team agrees on. Everything in Session 3 stands on it.</p>
+        </div>
+      </div>
+    </details>
+
+    <div class="callout tip">
+      <strong>Lake and warehouse are not rivals - they are a relay</strong>
+      A common mistake is treating "lake vs warehouse" as a either/or purchase. In a mature setup they work together: the lake keeps everything cheaply and flexibly, the warehouse serves the modeled subset that analytics needs fast and trusted. The pipeline below shows how the raw dump feeds both.
+    </div>
+  </section>
+
+  <!-- ============ COMPARE / FLAGSHIP ============ -->
+  <section class="section" id="compare">
+    <div class="section-kicker">
+      <span class="klabel">Flagship · the one to get right</span>
+      <h2>Data lake vs data warehouse, side by side <span class="tag demo">★ 8 min · everyone</span></h2>
+    </div>
+    <p class="lede">If you remember one distinction from this session, make it this one. A <strong>lake</strong> takes data raw, in any shape, and figures out structure only when you read it. A <strong>warehouse</strong> insists on clean, modeled structure before data goes in. Same raw dump feeds both - one optimized for keep-everything flexibility, the other for trusted-and-fast answers.</p>
+
+    <figure class="zoomable">
+      <svg viewBox="0 0 880 380" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="A raw dump feeds both a data lake and a data warehouse: the lake stores any-shape raw data with schema on read, the warehouse stores modeled clean data with schema on write">
+        <style>
+          .whB-T { font: 800 14px Inter, sans-serif; fill: #FFFFFF; }
+          .whB-S { font: 600 11px Inter, sans-serif; fill: #FFFFFF; }
+          .whB-H { font: 700 13px Inter, sans-serif; fill: #1E1B3A; }
+          .whB-C { font: 600 11px Inter, sans-serif; fill: #1E1B3A; }
+          .whB-N { font: 600 11px Inter, sans-serif; fill: #6B6785; }
+          .whB-a { stroke: #475569; stroke-width: 2.5; fill: none; marker-end: url(#whBh); }
+        </style>
+        <defs>
+          <marker id="whBh" markerWidth="9" markerHeight="9" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6" fill="none" stroke="#475569" stroke-width="1.6"/></marker>
+        </defs>
+        <!-- source dump -->
+        <rect x="30" y="150" width="150" height="60" rx="10" fill="#94A3B8"/>
+        <text class="whB-T" x="52" y="176">Data Dump</text><text class="whB-S" x="52" y="196">raw, as-is</text>
+        <path class="whB-a" d="M182,168 L246,110"/>
+        <path class="whB-a" d="M182,192 L246,250"/>
+        <!-- LAKE -->
+        <rect x="250" y="60" width="600" height="120" rx="12" fill="#F1F5F9" stroke="#64748B" stroke-width="2"/>
+        <rect x="266" y="76" width="180" height="36" rx="8" fill="#64748B"/><text class="whB-T" x="284" y="100">Data Lake</text>
+        <text class="whB-C" x="466" y="92">any shape in: logs, clickstream, images, tables</text>
+        <text class="whB-C" x="466" y="112" style="fill:#334155">schema-on-READ - structure decided when you query</text>
+        <rect x="266" y="126" width="120" height="34" rx="7" fill="#94A3B8"/><text class="whB-S" x="280" y="148">raw zone</text>
+        <rect x="402" y="126" width="120" height="34" rx="7" fill="#94A3B8"/><text class="whB-S" x="416" y="148">any format</text>
+        <rect x="538" y="126" width="130" height="34" rx="7" fill="#94A3B8"/><text class="whB-S" x="552" y="148">cheap + flexible</text>
+        <text class="whB-N" x="686" y="148" style="fill:#334155">keep everything</text>
+        <!-- WAREHOUSE -->
+        <rect x="250" y="210" width="600" height="120" rx="12" fill="#F1F5F9" stroke="#334155" stroke-width="2"/>
+        <rect x="266" y="226" width="200" height="36" rx="8" fill="#475569"/><text class="whB-T" x="284" y="250">Data Warehouse</text>
+        <text class="whB-C" x="486" y="242">modeled in: clean, conformed tables</text>
+        <text class="whB-C" x="486" y="262" style="fill:#334155">schema-on-WRITE - structure enforced before load</text>
+        <rect x="266" y="276" width="120" height="34" rx="7" fill="#475569"/><text class="whB-S" x="280" y="298">sales mart</text>
+        <rect x="402" y="276" width="130" height="34" rx="7" fill="#475569"/><text class="whB-S" x="416" y="298">customer mart</text>
+        <rect x="548" y="276" width="140" height="34" rx="7" fill="#334155"/><text class="whB-S" x="562" y="298">fast + trusted</text>
+        <text class="whB-N" x="706" y="298" style="fill:#334155">one truth</text>
+        <!-- note square + takeaway -->
+        <rect x="30" y="350" width="14" height="14" rx="3" fill="#84CC16"/>
+        <text class="whB-H" x="52" y="362">Lake = keep everything cheaply, structure later. Warehouse = trusted and fast now. Same raw feeds both.</text>
+      </svg>
+      <figcaption>🔍 Click to zoom - one raw dump, two destinations: the flexible lake and the trusted warehouse</figcaption>
+    </figure>
+
+    <details class="card">
+      <summary><span class="mode self">Self-study</span>The one-line test for which you need<span class="mini">2 min read</span><span class="caret">▶</span></summary>
+      <div class="body">
+        <table class="clean">
+          <thead><tr><th></th><th>Data Lake</th><th>Data Warehouse</th></tr></thead>
+          <tbody>
+            <tr><td><b>Data going in</b></td><td>raw, any shape</td><td>clean, modeled, conformed</td></tr>
+            <tr><td><b>When you set structure</b></td><td>on read (query time)</td><td>on write (load time)</td></tr>
+            <tr><td><b>Best at</b></td><td>keep everything, cheaply, flexibly</td><td>fast, trusted, repeatable reporting</td></tr>
+            <tr><td><b>Main risk</b></td><td>becomes a swamp without governance</td><td>rigid - new shapes need rework</td></tr>
+            <tr><td><b>Kasa use</b></td><td>all app + wallet + POS events pooled</td><td>the sales + customer marts BI runs on</td></tr>
+          </tbody>
+        </table>
+        <div class="callout tip">
+          <strong>The plain-English test</strong>
+          Ask: "do I know exactly how this data will be used?" If yes, model it into the warehouse. If not yet, land it in the lake and decide later. Most mature orgs run both, with the lake feeding a curated slice into the warehouse.
+        </div>
+      </div>
+    </details>
+  </section>
+
+  <!-- ============ HOMEWORK ============ -->
+  <section class="section" id="exercise">
+    <div class="section-kicker">
+      <span class="klabel">Before Session 3</span>
+      <h2>This week <span class="tag exercise">◐ 20 min total</span></h2>
+    </div>
+    <ul>
+      <li><strong>Find your marooned data.</strong> Name one dataset in your org that is trapped somewhere it cannot be reached - a local machine, one person's laptop, a system nobody can query. That is a Cloud Infra job waiting to happen.</li>
+      <li><strong>Test your monitoring.</strong> If your most important pipeline silently loaded half its data tonight, who would find out, and how long would it take? If the answer is "the business, eventually", you have an APM gap.</li>
+      <li><strong>Count your definitions.</strong> Pick one term everyone uses - "active customer", "revenue", "churn" - and ask three teams what it means. Write down the differences. That gap is your data dictionary's first entry.</li>
+      <li><strong>Optional:</strong> for one data source, decide out loud whether it belongs in a lake or a warehouse, using the one-line test. Notice how the decision hinges on "do I know how it will be used yet?"</li>
+    </ul>
+  </section>
+
+  <!-- ============ QUIZ ============ -->
+  <section class="section" id="quiz">
+    <div class="section-kicker">
+      <span class="klabel">Check yourself</span>
+      <h2>Three questions before you go 🎯 <span class="tag exercise">◐ 90 seconds</span></h2>
+    </div>
+    <div class="quiz-q" data-answer="1">
+      <p class="qtext">1 · What is the core difference between a data lake and a data warehouse?</p>
+      <button class="qopt" type="button">A · a lake is bigger, a warehouse is smaller</button>
+      <button class="qopt" type="button">B · a lake takes raw data of any shape (schema-on-read); a warehouse takes clean, modeled data (schema-on-write)</button>
+      <button class="qopt" type="button">C · a lake is on-prem, a warehouse is in the cloud</button>
+      <p class="qwhy">The distinction is about <em>when structure is applied</em>. A lake keeps everything raw and decides structure at read time; a warehouse enforces a clean, modeled shape before data loads, which is what makes it trusted and fast.</p>
+    </div>
+    <div class="quiz-q" data-answer="2">
+      <p class="qtext">2 · Kasa's nightly ETL silently half-loaded a region's data for two weeks. Which product is designed to catch that?</p>
+      <button class="qopt" type="button">A · Data Dictionary</button>
+      <button class="qopt" type="button">B · Data Warehouse</button>
+      <button class="qopt" type="button">C · App Performance Monitoring (APM)</button>
+      <p class="qwhy">APM watches pipelines for latency, errors, and anomalies like a sudden row-count drop. A job that completes without erroring is not the same as a job that worked - APM is what tells the difference.</p>
+    </div>
+    <div class="quiz-q" data-answer="0">
+      <p class="qtext">3 · Kasa had three different "revenue" numbers across finance, marketing, and store ops. What fixes that fastest?</p>
+      <button class="qopt" type="button">A · a Data Dictionary - one written, owned definition per term</button>
+      <button class="qopt" type="button">B · buying more cloud storage</button>
+      <button class="qopt" type="button">C · a bigger data lake</button>
+      <p class="qwhy">Three "revenue" numbers is a meaning problem, not a storage problem. All three were correct under different definitions. A data dictionary writes the definition down once, names an owner, and ends the argument - the cheapest trust-per-dollar on the ladder.</p>
+    </div>
+    <p class="quiz-score"></p>
+  </section>
+
+  <!-- ============ OFFICIAL SOURCES ============ -->
+  <section class="section" id="official">
+    <div class="section-kicker">
+      <span class="klabel">Source material</span>
+      <h2>What this session covers</h2>
+    </div>
+    <p class="lede">This is a capability catalog, not a build-it-yourself course. Session 2 teaches the seven infrastructure products at the "what / example / value / when" level so a leader can commission them and a follower can understand them. The deep how-to - actually building the cloud, the pipelines, the schema, and the SQL - lives in Phoebe's sibling courses, cross-linked below.</p>
+    <div class="covered">
+      <div class="covered-row"><span class="status pill solid">✓</span><span class="name">Cloud Infra, APM, Schema Design, Data Dictionary</span><span class="note">Part 1 - where data lands</span></div>
+      <div class="covered-row"><span class="status pill solid">✓</span><span class="name">Data Dump, Data Lake, Data Warehouse</span><span class="note">Part 2 - where data lives</span></div>
+      <div class="covered-row"><span class="status pill solid">✓</span><span class="name">Lake vs warehouse: schema-on-read vs schema-on-write</span><span class="note">Flagship - the distinction to get right</span></div>
+      <div class="covered-row"><span class="status pill light">◐</span><span class="name">Building pipelines, cloud, and monitoring hands-on</span><span class="note">go deeper in learn-dataops</span></div>
+      <div class="covered-row"><span class="status pill light">◐</span><span class="name">Writing the queries the warehouse serves</span><span class="note">go deeper in learn-sql</span></div>
+    </div>
+  </section>
+
+  <!-- ============ CHEAT SHEET ============ -->
+  <section class="cheat" id="cheatsheet">
+    <h3>Session 2 cheat sheet <span>· pin this</span></h3>
+    <div class="grid-2">
+      <div class="cheat-item"><b>Cloud Infra</b><span>Rent compute/storage instead of running it. Reach when data is trapped or load is spiky.</span></div>
+      <div class="cheat-item"><b>APM</b><span>Watches pipelines for breakage. Reach when silence could mean "broken", not "fine".</span></div>
+      <div class="cheat-item"><b>Schema + Dictionary</b><span>Schema = how tables fit (shape). Dictionary = what fields mean (meaning). Ends the "whose number" fight.</span></div>
+      <div class="cheat-item"><b>Data Dump</b><span>Raw as-is capture. Keep the raw so you can always recover ground truth.</span></div>
+      <div class="cheat-item"><b>Lake vs Warehouse</b><span>Lake = raw, any shape, schema-on-read, keep everything. Warehouse = clean, modeled, schema-on-write, trusted + fast.</span></div>
+      <div class="cheat-item"><b>They relay, not rival</b><span>Same raw dump feeds both. Lake keeps options open; warehouse serves the trusted slice.</span></div>
+    </div>
+  </section>
+
+  <footer class="pagefoot">
+    <span>Session 2 of 6 · learn-data-product-with-phoebe · by Phoebe Fu &nbsp;·&nbsp; 📚 <a href="https://phoebefu6.github.io/learn-with-phoebe/">Learn with Phoebe ↗</a></span>
+    <span><a href="../index.html">← All sessions</a> &nbsp;·&nbsp; <a href="03-data-analytics.html">Next: Data Analytics →</a></span>
+  </footer>
+
+</main>
+
+<script src="../assets/app.js?v=1"></script>
+</body>
+</html>

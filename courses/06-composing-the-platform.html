@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Session 6 · Composing the platform - learn data product with phoebe</title>
+<link rel="stylesheet" href="../assets/style.css?v=1">
+</head>
+<body>
+
+<div class="toolbar">
+  <div class="wrap">
+    <span class="crumb"><a href="../index.html">learn-data-product-with-phoebe</a> / Session 6 of 6</span>
+    <button class="btn" id="toggle-all" type="button">Expand all</button>
+    <button class="btn primary" id="zoom-toggle" type="button">Projector zoom: off</button>
+  </div>
+</div>
+
+<header class="masthead">
+  <div class="wrap">
+    <div class="eyebrow">Learn Data Product with Phoebe · Session 6 of 6</div>
+    <h1>Composing the platform <span class="accent">- how 29 products become one system</span></h1>
+    <p class="sub">Five sessions gave you 29 data products across four tiers. This capstone shows what they add up to: not a shopping list, but ONE governed platform where infrastructure carries analytics, analytics feeds data science, data science powers gen AI, and governance runs through all of it as a spine. We cover the reference architecture, the crawl-walk-run sequence for building it (and why skipping rungs backfires), where the money actually is per tier, and a self-assessment so you can name which rung your own org is on. This is Kasa's journey from emailed spreadsheets to one system - and the frame you take back to work.</p>
+    <div class="chip-row">
+      <span class="chip level">🟠 Capstone</span>
+      <span class="chip audience">Leaders + builders</span>
+      <span class="chip audience">Catalog</span>
+      <span class="chip time">45 min</span>
+    </div>
+    <div class="agenda">
+      <span class="a1" style="flex:1">0-3 · Setup</span>
+      <span class="a2" style="flex:3">3-18 · Architecture</span>
+      <span class="a3" style="flex:3">18-33 · Sequencing</span>
+      <span class="a4" style="flex:3">33-45 · ROI + your rung</span>
+    </div>
+  </div>
+</header>
+
+<main class="wrap">
+
+  <!-- ============ INTRO ============ -->
+  <section class="section" id="intro">
+    <div class="section-kicker">
+      <span class="klabel">Part 0</span>
+      <h2>From a catalog of parts to one machine</h2>
+    </div>
+    <p class="lede">You have now met all 29 products - <strong>7 infrastructure</strong>, <strong>11 analytics</strong>, <strong>5 data science</strong>, <strong>6 gen AI</strong>. Meeting them one card at a time was the point of the tour, but it is not how a real org experiences them. In a mature company they do not sit in a menu; they <strong>stack into a single platform</strong> where each layer stands on the one below and governance threads through every layer. This capstone assembles the parts. We draw the reference architecture, we sequence the build (crawl, walk, run), we put money against each tier, and we end where the course began - the ladder - now asking the harder question: which rung is <em>your</em> org actually on, and what do you build next?</p>
+    <div class="legend">
+      <span class="pill solid">Live - covered in session</span>
+      <span class="pill light">Self-study - read after</span>
+      <span class="pill amber">★ The running case: Kasa</span>
+      <span class="pill inkpill">29 products · 4 tiers · one platform</span>
+    </div>
+    <div class="callout win">
+      <strong>★ What you walk out with today</strong>
+      The assembly instructions for everything you learned: a one-page reference architecture, a defensible build order you can hand to a CFO, an ROI frame that shows infrastructure as enabling cost and data science as direct revenue, and a self-assessment that places any org on the ladder. Plus the payoff of the running case - Kasa, from spreadsheets emailed at midnight to one governed platform that a support agent can safely act on.
+    </div>
+  </section>
+
+  <!-- ============ PART 1: REFERENCE ARCHITECTURE ============ -->
+  <section class="section" id="architecture">
+    <div class="section-kicker">
+      <span class="klabel">Part 1 · the reference architecture</span>
+      <h2>How the four tiers actually stack <span class="tag concept">6 min live</span></h2>
+    </div>
+    <p class="lede">The ladder from Session 1 was a teaching frame. The <strong>reference architecture</strong> is what it looks like as a live system. Data flows up: <strong>infrastructure</strong> (cloud, lake, warehouse, schema) stores and serves it; <strong>analytics</strong> (validation, dashboards, scorecard, KPIs) turns it into trusted answers; <strong>data science</strong> (segmentation, forecasting, ML, fraud) predicts and personalizes on top of those trusted answers; <strong>gen AI</strong> (workflow automation, agentic AI) governs and amplifies at the summit. The critical move most architecture diagrams get wrong: <strong>governance and data quality are not a box at the top</strong>. They are a spine running through every tier - because rot at any layer poisons everything above it.</p>
+
+    <figure class="zoomable">
+      <svg viewBox="0 0 880 360" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Four stacked horizontal tier bands - slate infrastructure at the base, teal analytics, indigo data science, violet gen AI at the top - each labeled with its products, and a lime governance spine running vertically through all four on the right">
+        <style>
+          .pfT { font: 800 15px Inter, sans-serif; fill: #FFFFFF; }
+          .pfS { font: 600 11.5px Inter, sans-serif; fill: #FFFFFF; }
+          .pfN { font: 600 11px Inter, sans-serif; fill: #6B6785; }
+          .pfG { font: 800 11px Inter, sans-serif; fill: #1A2E05; }
+          .pfF { font: 700 12px Inter, sans-serif; fill: #1E1B3A; }
+          .pfA { stroke: #6366F1; stroke-width: 2.5; fill: none; marker-end: url(#pfAh); }
+        </style>
+        <defs>
+          <marker id="pfAh" markerWidth="9" markerHeight="9" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6" fill="none" stroke="#6366F1" stroke-width="1.6"/></marker>
+        </defs>
+        <text class="pfF" x="30" y="24">Data flows up the stack - governance holds it together</text>
+        <!-- Gen AI top -->
+        <rect x="30" y="42" width="740" height="58" rx="10" fill="#7C3AED"/>
+        <text class="pfT" x="50" y="68">Gen AI · govern + amplify</text>
+        <text class="pfS" x="50" y="88">workflow automation · agentic support agent · AI literacy</text>
+        <!-- Data Science -->
+        <rect x="30" y="110" width="740" height="58" rx="10" fill="#4F46E5"/>
+        <text class="pfT" x="50" y="136">Data Science · predict + personalize</text>
+        <text class="pfS" x="50" y="156">segmentation · sales forecasting · ML fraud detection</text>
+        <!-- Analytics -->
+        <rect x="30" y="178" width="740" height="58" rx="10" fill="#0D9488"/>
+        <text class="pfT" x="50" y="204">Data Analytics · measure + explain</text>
+        <text class="pfS" x="50" y="224">validation · dashboards · exec scorecard · KPI system</text>
+        <!-- Infra base -->
+        <rect x="30" y="246" width="740" height="58" rx="10" fill="#475569"/>
+        <text class="pfT" x="50" y="272">Infrastructure · store + serve</text>
+        <text class="pfS" x="50" y="292">cloud · data lake · warehouse · schema · dictionary</text>
+        <!-- up arrows between tiers -->
+        <path class="pfA" d="M400,246 L400,238"/>
+        <path class="pfA" d="M400,178 L400,170"/>
+        <path class="pfA" d="M400,110 L400,102"/>
+        <!-- governance spine -->
+        <rect x="784" y="42" width="66" height="262" rx="10" fill="#84CC16"/>
+        <text class="pfG" x="817" y="173" transform="rotate(90 817 173)">governance + quality spine</text>
+        <!-- note -->
+        <rect x="30" y="322" width="14" height="14" rx="3" fill="#84CC16"/>
+        <text class="pfN" x="52" y="333" style="fill:#1E1B3A">The spine touches every tier - schema, validation, model monitoring, PDPA guardrails. Pull it out and the whole stack drifts.</text>
+      </svg>
+      <figcaption>🔍 Click to zoom - the full stacked platform, base to summit, governance as a spine through all four tiers</figcaption>
+    </figure>
+
+    <details class="card" open>
+      <summary><span class="mode live">Live</span>Read the stack bottom to top<span class="mini">3 min</span><span class="caret">▶</span></summary>
+      <div class="body">
+        <p>Each tier hands a specific thing up to the one above it. Trace Kasa's flow and the dependencies become obvious:</p>
+        <ul>
+          <li><strong>Infrastructure hands up reachable data.</strong> The cloud lake and warehouse (Session 2) mean POS, app, and Kasa Pay events all land in one place, modeled once against a shared schema.</li>
+          <li><strong>Analytics hands up trusted numbers.</strong> Validation gates the load, the scorecard gives the CFO one revenue number, the KPI tree (Session 3) makes every metric owned and defined.</li>
+          <li><strong>Data science hands up predictions.</strong> Forecasting, segmentation, and the fraud model (Session 4) only work because they read from a warehouse the business already trusts.</li>
+          <li><strong>Gen AI hands up leverage.</strong> The support agent and automation (Session 5) act on all of it - safely, because governance says what they may touch.</li>
+        </ul>
+        <div class="callout example">
+          <span class="ex-pill">Real world</span>
+          <p>Kasa's support agent can say "your refund is approved, processed" only because four layers cooperate: the warehouse knows the order, validation says the record is clean, a model flags whether the account looks fraudulent, and governance confirms the refund is within policy. Remove any layer and the same sentence becomes a liability.</p>
+        </div>
+      </div>
+    </details>
+
+    <details class="card">
+      <summary><span class="mode self">Self-study</span>Why governance is a spine, not a hat<span class="mini">2 min read</span><span class="caret">▶</span></summary>
+      <div class="body">
+        <p>The tempting mistake is to draw governance as a final box you add once the fun parts are built. In a real platform it lives inside every tier:</p>
+        <table class="clean">
+          <thead><tr><th>Tier</th><th>Governance shows up as</th></tr></thead>
+          <tbody>
+            <tr><td><b>Infrastructure</b></td><td>schema design + the data dictionary - definitions and owners at the source</td></tr>
+            <tr><td><b>Analytics</b></td><td>data validation + metric definitions - the gate that stops garbage numbers</td></tr>
+            <tr><td><b>Data science</b></td><td>model ownership, monitoring, and retraining - a model is a product, not a notebook</td></tr>
+            <tr><td><b>Gen AI</b></td><td>PDPA-safe access, lineage, and the quality scorecard that gates what an agent may use</td></tr>
+          </tbody>
+        </table>
+        <div class="callout tip">
+          <strong>The gen-AI era gave governance teeth</strong>
+          Governance was always foundational, but when an agent can act at scale on your data, weak governance stops being a compliance footnote and becomes an operational risk. That is why Session 5 framed quality and governance as foundational tools that finally got urgency.
+        </div>
+      </div>
+    </details>
+  </section>
+
+  <!-- ============ PART 2: SEQUENCING ============ -->
+  <section class="section" id="sequencing">
+    <div class="section-kicker">
+      <span class="klabel">Part 2 · sequencing (crawl / walk / run)</span>
+      <h2>What a company like Kasa builds first <span class="tag concept">6 min live</span></h2>
+    </div>
+    <p class="lede">Knowing the architecture is not the same as knowing the order to build it. A company at Kasa's stage cannot buy all 29 products at once, and it should not want to. The sequence is <strong>crawl, walk, run</strong>, and it maps straight onto the ladder. <strong>Crawl:</strong> stand up infrastructure, a data dictionary, and validation - end the "whose number is right" fights. <strong>Walk:</strong> earn trustworthy analytics, ship the scorecard, land the first data science wins. <strong>Run:</strong> governance with teeth, automation, and agentic AI. Skip a phase and you pay for it later - which is the Session 1 lesson, now with a build plan attached.</p>
+
+    <figure class="zoomable">
+      <svg viewBox="0 0 880 320" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="A three-phase horizontal roadmap - crawl then walk then run - showing what gets built in each phase with arrows left to right and a lime takeaway note">
+        <style>
+          .rmT { font: 800 15px Inter, sans-serif; fill: #FFFFFF; }
+          .rmK { font: 700 11px Inter, sans-serif; fill: #FFFFFF; }
+          .rmB { font: 600 11.5px Inter, sans-serif; fill: #1E1B3A; }
+          .rmN { font: 600 11px Inter, sans-serif; fill: #6B6785; }
+          .rmG { font: 700 11px Inter, sans-serif; fill: #1A2E05; }
+          .rmA { stroke: #6366F1; stroke-width: 3; fill: none; marker-end: url(#rmAh); }
+        </style>
+        <defs>
+          <marker id="rmAh" markerWidth="10" markerHeight="10" refX="6.5" refY="3" orient="auto"><path d="M0,0 L6.5,3 L0,6" fill="none" stroke="#6366F1" stroke-width="1.8"/></marker>
+        </defs>
+        <!-- CRAWL -->
+        <rect x="24" y="30" width="250" height="46" rx="10" fill="#475569"/>
+        <text class="rmT" x="44" y="52">Crawl</text><text class="rmK" x="44" y="68">stop the bleeding on trust</text>
+        <rect x="24" y="86" width="250" height="150" rx="10" fill="#F1F5F9"/>
+        <text class="rmB" x="42" y="112">Cloud infrastructure</text>
+        <text class="rmB" x="42" y="138">Data lake + warehouse</text>
+        <text class="rmB" x="42" y="164">Schema + data dictionary</text>
+        <text class="rmB" x="42" y="190">Data validation</text>
+        <text class="rmN" x="42" y="218">"one place, one definition"</text>
+        <!-- WALK -->
+        <rect x="315" y="30" width="250" height="46" rx="10" fill="#0D9488"/>
+        <text class="rmT" x="335" y="52">Walk</text><text class="rmK" x="335" y="68">earn trust, first wins</text>
+        <rect x="315" y="86" width="250" height="150" rx="10" fill="#F0FDFA"/>
+        <text class="rmB" x="333" y="112">Dashboards + smart reports</text>
+        <text class="rmB" x="333" y="138">Exec scorecard + KPI tree</text>
+        <text class="rmB" x="333" y="164">Segmentation, forecasting</text>
+        <text class="rmB" x="333" y="190">First fraud model</text>
+        <text class="rmN" x="333" y="218">"trusted numbers that predict"</text>
+        <!-- RUN -->
+        <rect x="606" y="30" width="250" height="46" rx="10" fill="#7C3AED"/>
+        <text class="rmT" x="626" y="52">Run</text><text class="rmK" x="626" y="68">govern, automate, scale</text>
+        <rect x="606" y="86" width="250" height="150" rx="10" fill="#F5F3FF"/>
+        <text class="rmB" x="624" y="112">Governance with teeth</text>
+        <text class="rmB" x="624" y="138">Quality scorecard</text>
+        <text class="rmB" x="624" y="164">Workflow automation</text>
+        <text class="rmB" x="624" y="190">Agentic support AI</text>
+        <text class="rmN" x="624" y="218">"safe leverage on a solid base"</text>
+        <!-- arrows -->
+        <path class="rmA" d="M280,159 L309,159"/>
+        <path class="rmA" d="M571,159 L600,159"/>
+        <!-- takeaway -->
+        <rect x="24" y="272" width="14" height="14" rx="3" fill="#84CC16"/>
+        <text class="rmG" x="46" y="283" style="fill:#1E1B3A">Takeaway: each phase makes the next one safe. Run the agent before you crawl the warehouse and it acts confidently on numbers nobody trusts.</text>
+      </svg>
+      <figcaption>🔍 Click to zoom - the crawl / walk / run roadmap, mapped onto the four tiers</figcaption>
+    </figure>
+
+    <details class="card" open>
+      <summary><span class="mode live">Live</span>Kasa's before and after<span class="mini">3 min</span><span class="caret">▶</span></summary>
+      <div class="body">
+        <p>The sequence is not abstract - it is the arc of the running case. Kasa walked exactly this path:</p>
+        <table class="clean">
+          <thead><tr><th>Before (Session 1 chaos)</th><th>After (the platform)</th></tr></thead>
+          <tbody>
+            <tr><td>Every team emails its own spreadsheet</td><td>One warehouse, one scorecard, one revenue number</td></tr>
+            <tr><td>Three different "revenue" numbers</td><td>Metric definitions + KPI tree, each owned</td></tr>
+            <tr><td>Kasa Pay bleeding to fraud on a hand-written rule list</td><td>A live fraud model scoring every transaction</td></tr>
+            <tr><td>Support tickets piling up</td><td>An agentic assistant resolving routine cases 24/7</td></tr>
+            <tr><td>Leadership wants "AI", no warehouse to run it on</td><td>Gen AI safely on top of a governed base</td></tr>
+          </tbody>
+        </table>
+        <div class="callout example">
+          <span class="ex-pill">Real world</span>
+          <p>Mei, Kasa's CDAO, did not open with the fraud model even though the risk team begged for it. She spent the first quarter on the boring crawl - lake, warehouse, dictionary, validation - so that when the fraud model shipped in the walk phase, it read clean, trusted transaction data. A model built during the chaos would have learned from three conflicting revenue numbers.</p>
+        </div>
+      </div>
+    </details>
+
+    <details class="card">
+      <summary><span class="mode self">Self-study</span>Why skipping a rung backfires<span class="mini">2 min read</span><span class="caret">▶</span></summary>
+      <div class="body">
+        <p>Every expensive data failure is a phase-skip. The three most common, tied back to Session 1's ladder:</p>
+        <ul>
+          <li><strong>Run before crawl.</strong> Buying an AI copilot before the warehouse exists. It answers fluently and wrongly, and the trust you needed for adoption never forms.</li>
+          <li><strong>Walk before crawl.</strong> Shipping 40 dashboards with no validation or dictionary. Every leadership meeting becomes an argument about whose number is right - exactly Kasa's starting chaos.</li>
+          <li><strong>Half a walk.</strong> A brilliant churn or fraud model that lives in a notebook, never deployed, never owned. Value delivered: zero. A model becomes a product only when it runs in production.</li>
+        </ul>
+        <div class="callout tip">
+          <strong>Sequencing is not a ranking</strong>
+          Crawl work is not lesser work - infrastructure is not beneath AI. Crawl simply makes walk safe, and walk makes run safe. A mature org runs all three phases at once; a growing one earns them in order.
+        </div>
+      </div>
+    </details>
+  </section>
+
+  <!-- ============ PART 3: ROI FRAMING ============ -->
+  <section class="section" id="roi">
+    <div class="section-kicker">
+      <span class="klabel">Part 3 · the ROI framing</span>
+      <h2>Where the money actually is <span class="tag concept">5 min live</span></h2>
+    </div>
+    <p class="lede">Leaders fund tiers, not tutorials - so it matters where each tier pays back. The honest picture: <strong>infrastructure is enabling cost</strong> with no direct ROI of its own; it unlocks everything above it. <strong>Analytics</strong> returns efficiency and alignment - hours saved, one number everyone trusts. <strong>Data science</strong> is where direct revenue and loss-prevention live - fraud caught, stockouts avoided, segments monetized. <strong>Gen AI</strong> is leverage - it scales a team and serves customers around the clock - but it only returns anything if the base underneath is solid. Fund the base as an enabler, and set the payback expectation at the right tier.</p>
+
+    <table class="clean">
+      <thead><tr><th>Tier</th><th>Cost profile</th><th>Where the value shows up</th><th>ROI timing</th></tr></thead>
+      <tbody>
+        <tr><td><b>Infrastructure</b></td><td>Enabling cost - cloud, storage, engineering time</td><td>No direct ROI; unlocks every tier above it</td><td>Indirect, upfront</td></tr>
+        <tr><td><b>Analytics</b></td><td>Moderate - tools + analyst time</td><td>Efficiency + alignment: hours saved, decisions aligned on one number</td><td>Fast, months</td></tr>
+        <tr><td><b>Data science</b></td><td>Higher - talent + compute</td><td>Direct revenue + loss prevention: fraud caught, stockouts avoided, segments monetized</td><td>Direct, quarters</td></tr>
+        <tr><td><b>Gen AI</b></td><td>Variable - model + guardrail build</td><td>Leverage: scale the team, 24/7 service - but only safe on a solid base</td><td>Compounding, once base is solid</td></tr>
+      </tbody>
+    </table>
+
+    <details class="card">
+      <summary><span class="mode live">Live</span>How to pitch each tier to a CFO<span class="mini">3 min</span><span class="caret">▶</span></summary>
+      <div class="body">
+        <p>The pitch changes by tier because the payback changes. Match the language to the money:</p>
+        <ul>
+          <li><strong>Infrastructure:</strong> do not promise ROI - promise enablement. "This is the road; nothing else ships without it." Fund it as capability, measure it by what it unblocks.</li>
+          <li><strong>Analytics:</strong> promise time and alignment. Kasa's finance analyst got her Mondays back and the CFO stopped mediating revenue arguments. Count hours saved and meetings shortened.</li>
+          <li><strong>Data science:</strong> promise dollars. The Kasa Pay fraud model has a countable number - fraud losses prevented minus false declines. Forecasting has one too - inventory freed and stockouts avoided.</li>
+          <li><strong>Gen AI:</strong> promise leverage, not magic. The support agent handles routine tickets 24/7 so humans take the hard ones. Real, but only after the three tiers below it are trustworthy.</li>
+        </ul>
+        <div class="callout example">
+          <span class="ex-pill">Real world</span>
+          <p>When Mei asked Kasa's board for warehouse budget, she did not claim it would raise revenue - it would not, directly. She claimed it was the precondition for the fraud model that <em>would</em>. The board funded the enabler because she tied it to the revenue tier it unlocked, not to a fake ROI number of its own.</p>
+        </div>
+      </div>
+    </details>
+
+    <details class="card">
+      <summary><span class="mode self">Self-study</span>The trap of over-investing at the top<span class="mini">2 min read</span><span class="caret">▶</span></summary>
+      <div class="body">
+        <p>The most common budget mistake is spending big at the gen-AI tier while starving the base. It feels productive - AI is visible and exciting - but the return never lands, because the leverage tier multiplies whatever is beneath it, including zero.</p>
+        <div class="callout tip">
+          <strong>Gen AI multiplies the base, in both directions</strong>
+          On a trustworthy base, an agent multiplies good work - fast, safe, at scale. On a broken base, it multiplies errors just as efficiently, and now they arrive with the authority of an AI answer. The ROI of the top tier is almost entirely a function of the tiers below it.
+        </div>
+      </div>
+    </details>
+  </section>
+
+  <!-- ============ PART 4: WHICH RUNG IS YOUR ORG ON ============ -->
+  <section class="section" id="your-rung">
+    <div class="section-kicker">
+      <span class="klabel">Part 4 · which rung is your org on?</span>
+      <h2>Place yourself, then build the next rung <span class="tag concept">5 min live</span></h2>
+    </div>
+    <p class="lede">The course ends where it began - the ladder - but now you have the whole map. The last skill is honest self-placement. Most orgs overestimate by a rung: they run analytics unreliably and call themselves "data-driven", or they pilot AI on data nobody trusts and call themselves "AI-first". Find the <strong>highest tier you run reliably</strong>, not the highest one you have touched. That is your real rung. The next thing to build is almost never the shiniest product - it is the weakest link in the tier you are already on, or the first rung of the tier above. This is Phoebe's <strong>one governed platform</strong> vision in practice: not 29 shopping-cart items, but a deliberate climb.</p>
+
+    <details class="card" open>
+      <summary><span class="mode self">Self-assess</span>The four honest questions<span class="mini">3 min</span><span class="caret">▶</span></summary>
+      <div class="body">
+        <p>Answer yes or no, in order. The first "no" is your rung - that is where the next investment goes:</p>
+        <table class="clean">
+          <thead><tr><th>If you can honestly say...</th><th>then you reliably run...</th></tr></thead>
+          <tbody>
+            <tr><td>Our data is in one reachable place, modeled against a shared schema, with a dictionary</td><td>Infrastructure</td></tr>
+            <tr><td>Numbers are validated before use and leaders share one trusted scorecard</td><td>Analytics</td></tr>
+            <tr><td>We deploy and monitor models that predict or personalize, not notebooks</td><td>Data science</td></tr>
+            <tr><td>Governance has teeth and AI acts safely on top of all of the above</td><td>Gen AI</td></tr>
+          </tbody>
+        </table>
+        <div class="callout tip">
+          <strong>The first "no" is your build order</strong>
+          You do not need to be perfect at a rung to climb - but you need it reliable. If numbers still get argued in meetings, you are on the infrastructure-to-analytics boundary no matter how much AI you have bought. Fix the "no" before you reach higher.
+        </div>
+      </div>
+    </details>
+
+    <details class="card">
+      <summary><span class="mode self">Self-study</span>The send-off: one platform, not 29 purchases<span class="mini">2 min read</span><span class="caret">▶</span></summary>
+      <div class="body">
+        <p>You now hold the whole catalog and the frame that binds it. The parting idea to carry into your own org:</p>
+        <ul>
+          <li><strong>The 29 products are one system.</strong> Each card was a part; the platform is the machine. Buy parts to complete the machine, not to collect parts.</li>
+          <li><strong>Governance is the spine, not the last box.</strong> If it is not threaded through every tier from the start, retrofitting it is the most expensive project you will ever run.</li>
+          <li><strong>Climb deliberately.</strong> Crawl, walk, run. Fund the base as an enabler, expect dollars from data science, treat gen AI as leverage on a solid base.</li>
+          <li><strong>Kasa is you.</strong> Every org starts in some version of the spreadsheet chaos. The climb is available to any of them - in order.</li>
+        </ul>
+        <div class="callout example">
+          <span class="ex-pill">Real world</span>
+          <p>Kasa did not "do a digital transformation". It laid a base, earned trust, added prediction, then amplified - each step making the next safe. Eighteen months from emailed spreadsheets to a governed platform an AI agent could act on. That is the whole course in one sentence, and it is the plan you can borrow.</p>
+        </div>
+      </div>
+    </details>
+  </section>
+
+  <!-- ============ HOMEWORK ============ -->
+  <section class="section" id="exercise">
+    <div class="section-kicker">
+      <span class="klabel">The capstone</span>
+      <h2>Map YOUR org's next three rungs <span class="tag exercise">◐ 30 min total</span></h2>
+    </div>
+    <ul>
+      <li><strong>Place your org.</strong> Run the four honest questions above. Where is your first "no"? That tier - not the one you wish you were on - is your real rung.</li>
+      <li><strong>Draw your spine.</strong> Where does governance actually live in your stack today - threaded through every tier, or bolted on at the end? Name the biggest gap.</li>
+      <li><strong>Sequence three moves.</strong> Write the next three products you would build, in order, from the 29. Justify why each comes before the next using the crawl-walk-run logic.</li>
+      <li><strong>Attach the money.</strong> For each of the three, say whether it is enabling cost, efficiency, direct revenue, or leverage - and what you would tell a CFO to fund it.</li>
+    </ul>
+  </section>
+
+  <!-- ============ QUIZ ============ -->
+  <section class="section" id="quiz">
+    <div class="section-kicker">
+      <span class="klabel">Check yourself</span>
+      <h2>Three questions before you go 🎯 <span class="tag exercise">◐ 90 seconds</span></h2>
+    </div>
+    <div class="quiz-q" data-answer="1">
+      <p class="qtext">1 · In the reference architecture, where does governance belong?</p>
+      <button class="qopt" type="button">A · a final box added on top once the other tiers are built</button>
+      <button class="qopt" type="button">B · a spine running through all four tiers, from schema to AI guardrails</button>
+      <button class="qopt" type="button">C · only in the gen-AI tier, where AI acts on data</button>
+      <p class="qwhy">Governance and quality thread through every tier - schema and dictionary at the base, validation in analytics, model monitoring in DS, PDPA guardrails in gen AI. Bolt it on at the end and retrofitting it is the most expensive project you will run.</p>
+    </div>
+    <div class="quiz-q" data-answer="0">
+      <p class="qtext">2 · In crawl / walk / run, what does a company like Kasa build first - and why?</p>
+      <button class="qopt" type="button">A · infrastructure, a dictionary, and validation - to end the "whose number is right" fights</button>
+      <button class="qopt" type="button">B · the agentic AI support bot - because it is the highest-value product</button>
+      <button class="qopt" type="button">C · dashboards for every team - because leaders want visuals</button>
+      <p class="qwhy">Crawl comes first: one place, one definition, validated data. Build the agent before the warehouse and it acts confidently on numbers nobody trusts - the Session 1 rung-skip, now with a build plan attached.</p>
+    </div>
+    <div class="quiz-q" data-answer="2">
+      <p class="qtext">3 · Which tier is best described as "enabling cost with no direct ROI of its own"?</p>
+      <button class="qopt" type="button">A · data science - fraud caught and stockouts avoided</button>
+      <button class="qopt" type="button">B · gen AI - 24/7 leverage that scales the team</button>
+      <button class="qopt" type="button">C · infrastructure - it unlocks every tier above but pays back indirectly</button>
+      <p class="qwhy">Infrastructure is the road: nothing ships without it, but it returns value indirectly by unlocking analytics, data science, and gen AI. Pitch it as enablement tied to the revenue tier it makes possible, not as a fake ROI number.</p>
+    </div>
+    <p class="quiz-score"></p>
+  </section>
+
+  <!-- ============ OFFICIAL SOURCES ============ -->
+  <section class="section" id="official">
+    <div class="section-kicker">
+      <span class="klabel">Source material</span>
+      <h2>What this session covers</h2>
+    </div>
+    <p class="lede">This capstone assembles the 29 products into one system - it does not introduce new ones. It is taught at the leader-and-builder level: enough to sequence a build, fund it, and place your org, but not a line-by-line implementation guide. The deep how-to for each layer lives in Phoebe's sibling courses, cross-linked below.</p>
+    <div class="covered">
+      <div class="covered-row"><span class="status pill solid">✓</span><span class="name">The reference architecture + governance spine</span><span class="note">Part 1 - how the four tiers stack into one platform</span></div>
+      <div class="covered-row"><span class="status pill solid">✓</span><span class="name">Sequencing: crawl / walk / run + why skipping backfires</span><span class="note">Part 2 - the build order, Kasa before and after</span></div>
+      <div class="covered-row"><span class="status pill solid">✓</span><span class="name">The ROI framing per tier</span><span class="note">Part 3 - cost vs value vs payback timing</span></div>
+      <div class="covered-row"><span class="status pill light">◐</span><span class="name">Building the platform end to end (DataOps)</span><span class="note">go deeper - learn-dataops on the hub</span></div>
+      <div class="covered-row"><span class="status pill light">◐</span><span class="name">Sequencing + funding as strategy</span><span class="note">go deeper - learn-strategic-thinking</span></div>
+      <div class="covered-row"><span class="status pill light">◐</span><span class="name">Governance with teeth (PDPA / GDPR / AI Act)</span><span class="note">go deeper - the governance bucket on the hub</span></div>
+    </div>
+  </section>
+
+  <!-- ============ CHEAT SHEET ============ -->
+  <section class="cheat" id="cheatsheet">
+    <h3>Session 6 cheat sheet <span>· pin this</span></h3>
+    <div class="grid-2">
+      <div class="cheat-item"><b>One platform</b><span>The 29 products are one system: infra carries analytics carries DS carries gen AI.</span></div>
+      <div class="cheat-item"><b>Governance = spine</b><span>Threaded through every tier, from schema to AI guardrails. Never a hat on top.</span></div>
+      <div class="cheat-item"><b>Crawl / walk / run</b><span>Crawl: infra + dictionary + validation. Walk: analytics + first DS. Run: governance + automation + agents.</span></div>
+      <div class="cheat-item"><b>Skipping backfires</b><span>Run before crawl = an agent acting confidently on numbers nobody trusts.</span></div>
+      <div class="cheat-item"><b>Where the money is</b><span>Infra = enabling cost. Analytics = efficiency. DS = direct revenue. Gen AI = leverage.</span></div>
+      <div class="cheat-item"><b>Your rung</b><span>The highest tier you run reliably. First honest "no" is your next build.</span></div>
+    </div>
+  </section>
+
+  <footer class="pagefoot">
+    <span>Session 6 of 6 · learn-data-product-with-phoebe · by Phoebe Fu &nbsp;·&nbsp; 📚 <a href="https://phoebefu6.github.io/learn-with-phoebe/">Learn with Phoebe ↗</a></span>
+    <span><a href="../index.html">← All sessions</a> &nbsp;·&nbsp; <a href="https://phoebefu6.github.io/learn-with-phoebe/">More courses ↗</a></span>
+  </footer>
+
+</main>
+
+<script src="../assets/app.js?v=1"></script>
+</body>
+</html>
